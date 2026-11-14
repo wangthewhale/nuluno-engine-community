@@ -1,0 +1,12 @@
+include README.md LICENSE NOTICE THIRD_PARTY.md community.json skill-catalog.json setup.py pyproject.toml
+recursive-include community_namespace *.py
+recursive-include skills *.py *.md *.json
+recursive-include deploy/mcp-gateway *.mjs package.json package-lock.json
+recursive-include tests *.py
+recursive-include docs *.md *.json
+recursive-include scripts *.py
+prune build
+prune dist
+prune .venv
+global-exclude *.pyc *.sqlite *.sqlite3 .env credentials.json authorization.json
+global-exclude */node_modules/* */__pycache__/* */private/*

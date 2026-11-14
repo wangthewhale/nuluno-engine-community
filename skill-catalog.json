@@ -1,0 +1,25 @@
+{
+  "schema": "nuluno-starter-catalog-v1",
+  "version": "0.13.0a1",
+  "work_skills": [
+    {
+      "id": "S01",
+      "name": "growth-read-existing-offer",
+      "title": "讀懂現有產品與可賣方案",
+      "steps": 9,
+      "execution": "使用宿主瀏覽器唯讀查看現有產品。產出 brand.facts：每一條都附來源、核對日期、限制。不可用歷史摘要冒充目前產品能力。",
+      "inputs": [
+        "現有網址、操作說明與產品文件",
+        "已確認的價格、方案、試用、優惠與交付條件"
+      ],
+      "outputs": [
+        "可核對的產品與方案資料包",
+        "現有購買／註冊入口",
+        "不能補猜的未知事項與承諾界線"
+      ]
+    }
+  ],
+  "installable_skills": 2,
+  "edition": "community",
+  "commercial_methods_included": false
+}

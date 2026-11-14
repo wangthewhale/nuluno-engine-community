@@ -1,0 +1,16 @@
+{
+  "community_distribution": "nuluno-engine-community",
+  "community_version": "0.13.0a1",
+  "community_namespace": "nuluno_engine_community.growth_loop",
+  "community_console_scripts": [
+    "nuluno-engine-community"
+  ],
+  "community_starter_work_skills": 1,
+  "commercial_library_in_community": false,
+  "original_commercial_distribution_tested": true,
+  "original_version": "0.12.0",
+  "original_namespace_preserved": true,
+  "original_console_scripts_preserved": true,
+  "model_calls": 0,
+  "network_calls": 0
+}

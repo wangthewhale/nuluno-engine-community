@@ -1,0 +1,51 @@
+{
+  "skill_id": "S01",
+  "execution_contract": {
+    "schema": "growth-execution-contract-v1",
+    "operation": "offer.read",
+    "channel": "local",
+    "required_inputs": [
+      "brand_url",
+      "existing_product_pages"
+    ],
+    "native_output_proof": [
+      "actual_source_text",
+      "fact_ids",
+      "offer_limits",
+      "unknown_checkout_state"
+    ],
+    "tool_registration_is_not_execution": true,
+    "write_actions": [],
+    "dispatch": "operator_bound_tool_route_or_authenticated_host_tool; never a tool inferred from prose",
+    "identity_gate": false,
+    "needs_native_readback": false,
+    "capability_scope": "selected parent and channel capabilities",
+    "uncertain_write": "preserve original operation; reconcile without resend",
+    "human_only": [
+      "identity_verification",
+      "provider_terms",
+      "new_account_or_permission_consent",
+      "new_financial_commitment"
+    ],
+    "completion": "check this operation's concrete fields and every applicable procedure step; do not blanket-attest a whole SOP"
+  },
+  "fields": {
+    "facts": "dict",
+    "offer": "dict"
+  },
+  "needed_capabilities": [
+    "web.read"
+  ],
+  "permitted_action_types": [],
+  "required_step_ids": [
+    "S01.01",
+    "S01.02",
+    "S01.03",
+    "S01.04",
+    "S01.05",
+    "S01.06",
+    "S01.07",
+    "S01.08",
+    "S01.09"
+  ]
+}

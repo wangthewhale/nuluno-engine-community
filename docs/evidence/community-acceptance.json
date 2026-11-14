@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-14T04:27:28.013470+00:00",
+  "distribution": "nuluno-engine-community",
+  "version": "0.13.0a1",
+  "release_status": "launch_candidate_not_stable_release",
+  "python_namespace": "nuluno_engine_community.growth_loop",
+  "console_scripts": [
+    "nuluno-engine-community"
+  ],
+  "license": "Apache-2.0",
+  "commercial_pack_license": "commercial-end-user",
+  "wheel": {
+    "file": "nuluno_engine_community-0.13.0a1-py3-none-any.whl",
+    "sha256": "8951223a322a187e907f990141077a0d7f257f0f775e812d1c173d76de424354",
+    "bytes": 291432,
+    "commercial_catalogs_included": false,
+    "legacy_growth_loop_paths_included": false,
+    "installed_payload_files_matched": true
+  },
+  "separate_commercial_pack": {
+    "file": "nuluno-sales-methods-0.12.0.zip",
+    "sha256": "a20a4251502d3c4f35c42c2af9d2505e8807cf3201e1ba5670137b61dbc6cc58",
+    "runtime_code_included": false,
+    "public_repository_included": false
+  },
+  "starter_counts": {
+    "work_skills": 1,
+    "skill_folders": 2,
+    "goals": 0,
+    "graph_templates": 0,
+    "placeholder_goal_or_channel_catalogs": false
+  },
+  "loaded_commercial_counts": {
+    "work_skills": 186,
+    "skill_folders": 188,
+    "goals": 99,
+    "graph_templates": 134,
+    "channel_skills": 152
+  },
+  "checks": {
+    "python_tests": 27,
+    "python_failures": 0,
+    "python_skips_with_licensed_pack": 0,
+    "official_sdk_tests": 3,
+    "official_sdk_failures": 0,
+    "official_sdk_skips": 0,
+    "live_starter_passed": true,
+    "live_starter_to_paid_pack_same_run_passed": true,
+    "original_012_same_venv_coexistence_passed": true,
+    "source_paths_and_credentials_in_public_receipts": false,
+    "model_calls": 0,
+    "platform_writes": 0,
+    "full_cost_minor": null,
+    "sales_lift_proven": false,
+    "self_created_method_superiority_proven": false,
+    "all_99_goals_live_accepted": false,
+    "linux_ci_executed_by_this_agent": false
+  },
+  "receipts": {
+    "starter": "community-namespaced-starter-2026-11-14.json",
+    "paid_pack_same_run": "community-namespaced-paid-coexistence-2026-11-14.json",
+    "original_release_coexistence": "community-commercial-coexistence-2026-11-14.json"
+  },
+  "unchanged_frozen_learning_kernel": {
+    "artifact_kernel.py": "9bf36633343db2ea92c2f053a7166477c8e62350e7c67610f96c8376167166d7",
+    "artifact_evolution.py": "9aaee4539f026286a4d55df1c0eff50efd139422f3afcde684fdb075aba5e77f",
+    "public_sources.py": "6a348ec7230892c96a32ecec741121079e63a9e38af985a64383653f01d5d9fe"
+  },
+  "known_resolved_candidate_failure": "First full-library MCP discovery exceeded the configured response cap; paginated catalog/step discovery was implemented and the same-run live acceptance was repeated successfully. Earlier candidate receipts were retained, not overwritten."
+}

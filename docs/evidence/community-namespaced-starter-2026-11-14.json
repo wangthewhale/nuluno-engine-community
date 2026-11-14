@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-14T04:21:31.592Z",
+  "engine_version": "0.13.0a1",
+  "implementation": {
+    "public-read-demo.mjs": "13bd3ea90f7ca0a45c062ef25f347d5a7e3064fbcea1fbdb3adec20b79f22e49",
+    "compatibility.mjs": "182b5a9be894c8ec90518760549a7cb72acf1ba6cc0a4648324469125cb0abfd",
+    "server.mjs": "51dfa41b6548517cb117a16a8e834fbab7fb995d0cb4a52196b97346919cdf78"
+  },
+  "classification": "live_public_read_with_operator_injected_process_restart",
+  "commercial_library": null,
+  "source": {
+    "url": "https://www.python.org/",
+    "http_status": 200,
+    "body_sha256": "e98240c684517559ac824bba00b53d7624771418fb52a4923602a62ef59b1de9",
+    "receipt_id": "4062460ea7ee0b4f164a4f678e846a2c73e5e3f2695752f04ff24fe8940d7b7f",
+    "observed_at_unix": 1794630089.360699
+  },
+  "checks": {
+    "official_sdk_mcp": true,
+    "original_receipt_reused_before_restart": true,
+    "process_replaced": true,
+    "same_run_and_memory_preserved": true,
+    "original_receipt_reused_after_restart": true,
+    "exact_source_quota_preserved": true,
+    "cross_run_denied": true,
+    "original_key_revoked": true,
+    "revoked_key_http_status": 401,
+    "original_key_replaced": false
+  },
+  "native_sqlite_verification": {
+    "request_rows": 1,
+    "attempts": 1,
+    "states": [
+      "completed"
+    ],
+    "body_sha256": "e98240c684517559ac824bba00b53d7624771418fb52a4923602a62ef59b1de9",
+    "redirect_hops": 0,
+    "physical_gets": 1,
+    "external_operations": 0
+  },
+  "public_read_metrics": {
+    "attempts": 1,
+    "original_receipt_reuses": 2,
+    "saved_completed_requests": 1,
+    "unknown_or_failed_requests": 0
+  },
+  "first_public_source_seconds": 8.30009412765503,
+  "costs": {
+    "model_invoice": null,
+    "hosting": null,
+    "full_cost_minor": null,
+    "unknown_is_zero": false
+  },
+  "compatibility": {
+    "schema_version": 1,
+    "observed_at": "2026-11-14T04:21:21.248Z",
+    "transport": "MCP Streamable HTTP",
+    "tested_client": "@modelcontextprotocol/client",
+    "tested_client_version": "2.4.0",
+    "node_version": "24.22.1",
+    "engine_gateway_version": "0.13.0-alpha.1",
+    "discovered_tools": [
+      "cost_summary",
+      "execution_metrics",
+      "memory_add",
+      "memory_search",
+      "read_public_source",
+      "run_create",
+      "status"
+    ],
+    "read_public_source_annotated_read_only": true,
+    "status_read_succeeded": true,
+    "nuluno_com_cookie_used": false,
+    "model_calls": 0,
+    "external_source_reads_by_probe": 0,
+    "other_clients_tested": [],
+    "all_agents_compatible_claimed": false
+  },
+  "limits": {
+    "model_calls": 0,
+    "platform_writes": 0,
+    "private_inbox_access": false,
+    "sales_outcome_verified": false,
+    "self_created_method_verified": false,
+    "all_99_goals_live_accepted": false,
+    "natural_failure_recovery_rate_measured": false,
+    "complete_human_intervention_count": null
+  },
+  "private_temporary_state_removed": true
+}

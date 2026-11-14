@@ -1,0 +1,5 @@
+# Community preview evidence
+
+The final namespace-isolated acceptance is community-acceptance.json. Its three referenced receipts record real installed-wheel executions, not operations happening when these files are viewed. Starter and paid-pack cases each made one real public GET, reused the original receipt twice across a process replacement, and denied the original key after revocation. The paid case also ran while original commercial 0.12 was installed in the same isolated environment, then loaded the separately licensed library without changing run identity or authority.
+
+Other files are earlier candidate observations retained for provenance. The first oversized full-catalog attempt failed and issued no successful receipt; the final version uses bounded catalog pages. This is execution/installation evidence, not sales uplift, zero complete cost, universal client compatibility or AI-created method superiority. Full actual cost remains unknown. Linux CI is configured, but is only proven once a publisher records the actual run.

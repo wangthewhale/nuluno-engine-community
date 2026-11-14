@@ -1,0 +1,31 @@
+{
+  "schema": "nuluno-method-proposal-v1",
+  "method_id": "normalize-public-query",
+  "version": "1.0.0",
+  "parent_digest": null,
+  "summary": "Strip surrounding whitespace and normalize the case of a public research query.",
+  "applicability": {
+    "task": "public query preparation",
+    "conditions": "Input is an object containing a public, non-secret string query.",
+    "limits": "Does not search, select an audience, change authority, or demonstrate sales improvement."
+  },
+  "proposal": {
+    "kind": "program",
+    "path": "program.json"
+  },
+  "files": {
+    "program.json": "e1c919c968fe62833c66149f2fbb6c6cbdecde9f1ce5360b9798b07233db8119",
+    "evidence.json": "d6b67cf2f87e7e2eb6789f7a8a8ac4d68c6421904d0c83aa7fc1a51f5d3499d6",
+    "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "license": {
+    "identifier": "Apache-2.0",
+    "path": "LICENSE.txt"
+  },
+  "evidence": {
+    "path": "evidence.json",
+    "class": "illustrative",
+    "data_rights": "author_owned"
+  },
+  "requested_permissions": []
+}

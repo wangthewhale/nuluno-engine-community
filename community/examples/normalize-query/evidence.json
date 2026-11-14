@@ -1,0 +1,13 @@
+{
+  "class": "illustrative",
+  "input": {
+    "query": "  PUBLIC PRODUCT FACTS  "
+  },
+  "expected": {
+    "query": "public product facts"
+  },
+  "real_platform_operation": false,
+  "new_customers": null,
+  "full_cost": null,
+  "autonomous_method_creation_proven": false
+}

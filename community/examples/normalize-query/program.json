@@ -1,0 +1,28 @@
+{
+  "steps": [
+    {
+      "id": "clean",
+      "op": "strip",
+      "args": {
+        "value": {
+          "ref": "input",
+          "path": "/query"
+        }
+      }
+    },
+    {
+      "id": "normalized",
+      "op": "lower",
+      "args": {
+        "value": {
+          "ref": "clean"
+        }
+      }
+    }
+  ],
+  "output": {
+    "query": {
+      "ref": "normalized"
+    }
+  }
+}

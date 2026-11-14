@@ -1,0 +1,8 @@
+{
+  "schema": "nuluno-community-distribution-v1",
+  "version": "0.13.0a1",
+  "starter_skill_ids": [
+    "S01"
+  ],
+  "full_methods_pack_included": false
+}

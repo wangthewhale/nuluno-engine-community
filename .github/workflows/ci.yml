@@ -1,0 +1,28 @@
+name: community-core
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  public-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python -m pip install .
+      - name: Verify genuine installed starter away from checkout
+        working-directory: /tmp
+        run: nuluno-engine-community doctor
+      - name: Core bounded learning and public pack rejection checks
+        run: python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests -v
+      - run: npm --prefix deploy/mcp-gateway ci --ignore-scripts --no-audit --no-fund
+      - name: Standard MCP, scope, state and compatibility
+        run: node --test deploy/mcp-gateway/gateway.test.mjs deploy/mcp-gateway/compatibility.test.mjs
+      - name: Build independent container
+        run: docker build -f deploy/Dockerfile.mcp -t nuluno-engine-community:ci .
+      - name: Actually boot container and preserve original state across replacement
+        run: node .github/scripts/container-smoke.mjs

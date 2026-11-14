@@ -1,0 +1,23 @@
+FROM node:24-bookworm-slim AS gateway
+WORKDIR /gateway
+COPY deploy/mcp-gateway/package*.json ./
+RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+
+FROM python:3.11-slim-bookworm
+RUN apt-get update && apt-get install -y --no-install-recommends libstdc++6 libatomic1 ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=gateway /usr/local/bin/node /usr/local/bin/node
+COPY --from=gateway /gateway /opt/nuluno-gateway
+WORKDIR /build
+COPY . .
+RUN python -m pip install --no-cache-dir . \
+    && cp deploy/mcp-gateway/server.mjs /opt/nuluno-gateway/ \
+    && useradd --uid 10001 --create-home engine \
+    && mkdir -p /var/lib/nuluno && chown engine:engine /var/lib/nuluno \
+    && rm -rf /build
+USER engine
+WORKDIR /var/lib/nuluno
+ENV ENGINE_WORKSPACE=/var/lib/nuluno/state ENGINE_CONFIG=/var/lib/nuluno/service.json ENGINE_BIND_HOST=0.0.0.0 PORT=8788 NULUNO_METHOD_PACK_DIR=/var/lib/nuluno/method-packs
+EXPOSE 8788
+VOLUME ["/var/lib/nuluno"]
+ENTRYPOINT ["node", "/opt/nuluno-gateway/server.mjs"]

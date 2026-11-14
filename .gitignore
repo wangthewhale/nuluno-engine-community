@@ -1,0 +1,14 @@
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.private/
+.state/
+service.json
+*.sqlite3
+*.sqlite3-*
+.env
+.env.*
+build/
+dist/
+*.egg-info/
