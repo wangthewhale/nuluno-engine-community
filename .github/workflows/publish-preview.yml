@@ -1,0 +1,66 @@
+name: Publish fixed reviewed community preview
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: publish-fixed-community-preview
+  cancel-in-progress: false
+jobs:
+  verify:
+    if: github.repository_owner == 'wangthewhale' && github.repository == 'wangthewhale/nuluno-engine-community' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Download only the fixed reviewed readiness artifact
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          artifact-ids: '14114321822'
+          run-id: '43596408875'
+          repository: 'wangthewhale/nuluno-engine-community'
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/reviewed-preview
+      - name: Test closed file and existing-release boundaries without REST writes
+        run: node --test scripts/publish-preview.test.mjs
+      - name: Verify all four exact assets and manifest offline
+        run: node scripts/publish-preview.mjs --directory "$RUNNER_TEMP/reviewed-preview" --dry-run
+  publish:
+    needs: verify
+    if: github.repository_owner == 'wangthewhale' && github.repository == 'wangthewhale/nuluno-engine-community' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Re-download the same immutable reviewed artifact
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          artifact-ids: '14114321822'
+          run-id: '43596408875'
+          repository: 'wangthewhale/nuluno-engine-community'
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/reviewed-preview
+      - name: Reverify bytes then publish only this fixed prerelease
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/publish-preview.mjs --directory "$RUNNER_TEMP/reviewed-preview" --publish

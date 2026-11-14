@@ -1,0 +1,38 @@
+{
+  "schema": "nuluno-fixed-preview-publisher-v1",
+  "repository": "wangthewhale/nuluno-engine-community",
+  "sourceCommit": "bd2d256620a50b62460d6c022132a7157a31e0a8",
+  "version": "0.13.0a1",
+  "tag": "community-v0.13.0a1",
+  "title": "Nuluno Engine Community 0.13.0a1 preview",
+  "notes": "Apache-2.0 Nuluno Engine Community 0.13.0a1 prerelease.\n\nThis release is bound to source commit bd2d256620a50b62460d6c022132a7157a31e0a8 and the reviewed readiness run 43596408875. It contains the executable community core and complete S01 research starter, persistent tasks/source receipts, scoped MCP and bounded method-validation mechanisms. The commercial sales-method library is not included.\n\nPublic read/reuse/restart/revoke evidence is separate from controlled tests. V1 ran against the original Engine 0.12 kernel; V2 and V3 ran against installed Community 0.13.0a1. All three held-out technical proposals were rejected; V3 improved required-fact retention from 2/9 to 7/9 but still failed the per-source gate. Successful self-evolution, sales lift and lower complete costs have not been established. Private Gmail-to-publication acceptance remains unverified. Owner consent, identity checks and CAPTCHA are not bypassed.\n\nThis is not a PyPI/npm publication, a permanent hosted service, or a signed-attestation claim. Bring the required host, model and platform permissions. Four fixed public assets only: wheel, source ZIP, release manifest and SHA256SUMS. The manifest describes readiness before publication.\n",
+  "artifactRunId": 43596408875,
+  "artifactId": 14114321822,
+  "artifactName": "community-release-readiness-bd2d256620a50b62460d6c022132a7157a31e0a8",
+  "manifest": {
+    "schema": "nuluno-community-release-readiness-v1",
+    "sourceField": "source_commit",
+    "commercialField": "commercial_library_included",
+    "expected": {
+      "namespace": "nuluno_engine_community.growth_loop"
+    }
+  },
+  "files": {
+    "SHA256SUMS": {
+      "sha256": "24e7334e5a684dde0ca456a5b04bd7ceccd168d9dd66a5571d02890fbdaba4f9",
+      "bytes": 314
+    },
+    "nuluno-engine-community-0.13.0a1-source.zip": {
+      "sha256": "8b13d7029c915d312993bbbcee12cd5db8a61b4ded5f1bd17944924c79c50d41",
+      "bytes": 440180
+    },
+    "nuluno_engine_community-0.13.0a1-py3-none-any.whl": {
+      "sha256": "0af3f325fc0ab00b7c34a1c81e0c6680359d90264c99c8f95c46cc5f87a02926",
+      "bytes": 292080
+    },
+    "release-manifest.json": {
+      "sha256": "50a4b60781d34f90e4e1882b8d0a73351b82bdcdbca8755ed60259026674222c",
+      "bytes": 760
+    }
+  }
+}
