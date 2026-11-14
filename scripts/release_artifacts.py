@@ -20,7 +20,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 PREFIX = 'nuluno-engine-community'
 VERSION = re.compile(r'\d+\.\d+\.\d+(?:(?:a|b|rc)\d+)?')
-ALLOWED_DIRS = {'.github','community','community_namespace','deploy','docs','scripts','skills','tests'}
+ALLOWED_DIRS = {'.github','community','community_namespace','deploy','docs','examples','scripts','skills','tests'}
 ALLOWED_TOP = {'README.md','LICENSE','NOTICE','THIRD_PARTY.md','pyproject.toml','setup.py','MANIFEST.in','community.json','skill-catalog.json','CONTRIBUTING.md','SECURITY.md','.gitignore','.dockerignore'}
 FORBIDDEN_PARTS = {'.git','.venv','.private','node_modules','__pycache__','private','credentials','commercial-artifacts'}
 FORBIDDEN_FILES = {'credentials.json','authorization.json','service.json','goal-catalog.json','channel-catalog.json'}
@@ -38,6 +38,7 @@ def safe_path(name):
     if any(p in FORBIDDEN_PARTS or p.endswith('.egg-info') for p in parts):raise ValueError('private_or_generated_source_path')
     if Path(name).name in FORBIDDEN_FILES or Path(name).name.startswith('.env') or '.sqlite' in name or name.endswith(('.log','.zip','.whl')):raise ValueError('restricted_source_file')
     if parts[0] not in ALLOWED_DIRS and name not in ALLOWED_TOP:raise ValueError('unreviewed_source_root')
+    if parts[0]=='examples' and (len(parts)<3 or parts[1]!='method-learning'):raise ValueError('unreviewed_example_folder')
     if parts[0]=='skills' and (len(parts)<2 or parts[1] not in {'growth-meta-ig-loop','growth-read-existing-offer'}):raise ValueError('commercial_skill_folder_forbidden')
     if '/references/graphs/' in name:raise ValueError('commercial_graph_library_forbidden')
     return name
