@@ -24,7 +24,7 @@ Report a reproducible first-run problem through [Issues](https://github.com/wang
 
 ## Real method experiments, including the failures
 
-[Three frozen AI-authored proposals](examples/method-learning/README.md) were evaluated on nine real public sources. The third candidate retained 7/9 independently required facts versus the prefix baseline's 2/9, but still missed two required facts. The original gate rejected it. All three failures, original criteria, source hashes and replay instructions are retained. The installed community kernel was used; no live adoption, sales improvement or model-weight training is claimed.
+[Three frozen AI-authored proposals](examples/method-learning/README.md) were evaluated on nine real public sources. The third candidate retained 7/9 independently required facts versus the prefix baseline's 2/9, but still missed two required facts. The original gate rejected it. All three failures, original criteria, source hashes and replay instructions are retained. V2 and V3 used the installed Community 0.13.0a1 wrapper; V1 used the original 0.12 kernel. All three were rejected by the host source-quality gate before native adoption. No live adoption, sales improvement or model-weight training is claimed.
 
 ## Separately acquired commercial methods
 
