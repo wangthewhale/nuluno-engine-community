@@ -1,0 +1,20 @@
+{
+  "source_body_sha256": "ab4d578cc9c75dc3ef67bde3b3382082e5953b34f0f93ff9061cd6cab2c65f4c",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "free-channels",
+      "quote": "Free\nforever\nConnect up to 3 channels"
+    },
+    {
+      "id": "essentials-channel-price",
+      "quote": "Essentials\nRecommended\n$5\n/month\n1\nchannel"
+    },
+    {
+      "id": "annual-condition",
+      "quote": "60\nbilled yearly (save 2 months)"
+    }
+  ]
+}

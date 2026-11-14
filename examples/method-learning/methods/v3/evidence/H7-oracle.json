@@ -1,0 +1,20 @@
+{
+  "source_body_sha256": "741e5740f22f9af4c423d4c895828626cc9f03fbede38de50c3ae63f7ab33624",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "free-capacity",
+      "quote": "Free\n0\nUp to\n250\nsubscribers"
+    },
+    {
+      "id": "comfort-starting-price",
+      "quote": "Comfort plan\n(starting $12/month)"
+    },
+    {
+      "id": "premium-trial",
+      "quote": "14 days to try premium features."
+    }
+  ]
+}

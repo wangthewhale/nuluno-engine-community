@@ -1,0 +1,16 @@
+{
+  "source_body_sha256": "2ecc929ce7048990e79df562265bdb48a8c96b91f454641622d4c0cbd4fbaeb6",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "free-conditions",
+      "quote": "unlimited forms and submissions, completely free, as long as you stay within our\nfair usage guidelines"
+    },
+    {
+      "id": "pro-price",
+      "quote": "Pro\n$\n24\nper month"
+    }
+  ]
+}

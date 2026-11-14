@@ -1,0 +1,20 @@
+{
+  "source_body_sha256": "6ff8b1dc6823247e8925589965f49e5c52a50b4879a174ad49c35b49471d79cb",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "individual-free",
+      "quote": "Individuals\nFree"
+    },
+    {
+      "id": "teams-annual-price",
+      "quote": "Teams\nYearly\n$12\nper user/month"
+    },
+    {
+      "id": "trial",
+      "quote": "*14 day free trial"
+    }
+  ]
+}

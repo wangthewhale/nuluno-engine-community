@@ -1,0 +1,16 @@
+{
+  "source_body_sha256": "b21ff522ab8fdcb1e585de24b0ef1626293b7eb94c32d0563dc215d5e241a57b",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected. Canonical public redirects separately verified.",
+  "claims": [
+    {
+      "id": "self-serve-price",
+      "quote": "A simple dashboard to understand your website traffic\n$20\n/month"
+    },
+    {
+      "id": "trial-condition",
+      "quote": "14-day free trial (no credit card required)"
+    }
+  ]
+}

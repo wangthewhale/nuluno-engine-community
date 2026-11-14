@@ -1,0 +1,20 @@
+{
+  "source_body_sha256": "c12518ee32d2e42fc127e908ed275016900d40ef82dd65d67f687d14e3f1a56a",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "free-tier",
+      "quote": "Absolutely nothing for your first 100 subscribers."
+    },
+    {
+      "id": "tagging-addon",
+      "quote": "Tagging &\nsegmentation\n+$\n9\n/month"
+    },
+    {
+      "id": "sponsorship-addon",
+      "quote": "Sponsorships\n+$\n29\n/month"
+    }
+  ]
+}

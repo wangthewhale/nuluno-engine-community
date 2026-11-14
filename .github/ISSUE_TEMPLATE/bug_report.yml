@@ -1,0 +1,42 @@
+name: Reproducible bug
+description: Report an execution, protocol, library or learning defect using safe evidence.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "For vulnerabilities, use SECURITY.md and report privately. Never attach credentials, inbox content, customer lists, private databases or commercial pack contents."
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "0.13.0a1 / exact commit"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and client
+      description: "OS, Python/Node versions, MCP client/version and installation method. No environment-variable dump."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: "Use public or synthetic inputs; preserve the original request/receipt identity where relevant."
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: "Include the redacted error and what remains unknown. HTTP success, a saved note and a sale are different outcomes."
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Safe evidence
+      options:
+        - label: "I removed secrets, private account/customer data and restricted commercial library content."
+          required: true

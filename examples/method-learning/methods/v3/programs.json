@@ -1,0 +1,24 @@
+{
+  "schema": "nuluno-learning-demo-programs-v1",
+  "baseline": {
+    "steps": [
+      {"id": "prefix", "op": "pick", "args": {"value": {"ref": "input"}, "path": "/prefix_text"}}
+    ],
+    "output": {"text": {"ref": "prefix"}}
+  },
+  "candidate": {
+    "steps": [
+      {"id": "selected", "op": "filter_equal", "args": {"values": {"ref": "input", "path": "/blocks"}, "path": "/selected", "equals": true}},
+      {"id": "texts", "op": "map_pick", "args": {"values": {"ref": "selected"}, "path": "/text"}},
+      {"id": "context", "op": "concat", "args": {"values": {"ref": "texts"}, "separator": "\n[…]\n"}}
+    ],
+    "output": {"text": {"ref": "context"}}
+  },
+  "rejected_proposal": {
+    "steps": [
+      {"id": "prefix", "op": "pick", "args": {"value": {"ref": "input"}, "path": "/prefix_text"}},
+      {"id": "extra", "op": "identity", "args": {"value": {"ref": "prefix"}}}
+    ],
+    "output": {"text": {"ref": "extra"}}
+  }
+}

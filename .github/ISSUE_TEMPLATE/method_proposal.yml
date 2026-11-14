@@ -1,0 +1,35 @@
+name: Bounded method proposal
+description: Propose a reviewable method with explicit evidence and limits.
+title: "[Method] "
+body:
+  - type: markdown
+    attributes:
+      value: "Start with community/README.md and its local inspector. A valid proposal does not grant permissions or mean adoption. This interchange currently accepts pure bounded programs; graphs/external tools need separate host review."
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and applicable conditions
+      description: "What fails today? When should the method help, and when should it not be used?"
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Proposed method and inspection result
+      description: "Link the proposal files or PR and the inspector result. Include limitations; do not upload restricted packs or private data."
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and comparison
+      description: "Separate illustrative/controlled cases, real executions and commercial outcomes. State baseline, held-out cases, matching conditions, failures and unknown full costs. No evidence is an acceptable honest starting point."
+    validations:
+      required: true
+  - type: textarea
+    id: rights
+    attributes:
+      label: Source and rights declaration
+      description: "Identify public/synthetic sources and the proposed license. A declaration is not independent verification of rights or results."
+    validations:
+      required: true

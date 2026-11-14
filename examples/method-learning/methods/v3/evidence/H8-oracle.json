@@ -1,0 +1,20 @@
+{
+  "source_body_sha256": "d12ea9208818a05a9ea00cce1d0a42d1793c17eea098ef42abc21e4ed0391849",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "annual-basic-price",
+      "quote": "$\n10\nper user / month\nbilled\nannually"
+    },
+    {
+      "id": "guarantee",
+      "quote": "30-day money-back guarantee"
+    },
+    {
+      "id": "no-selfserve-trial",
+      "quote": "There’s no self-serve trial."
+    }
+  ]
+}

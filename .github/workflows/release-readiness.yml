@@ -1,0 +1,56 @@
+name: release-readiness
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version already recorded in pyproject.toml; this workflow does not bump it
+        required: true
+        default: 0.13.0a1
+        type: string
+  push:
+    tags:
+      - 'community-v*'
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Prepare exact-commit community artifacts
+        env:
+          EXPECTED_VERSION: ${{ inputs.version || '' }}
+        run: python scripts/release_artifacts.py --expected-version "$EXPECTED_VERSION" --output dist/release-readiness
+      - name: Install the prepared wheel
+        run: python -m pip install --no-deps dist/release-readiness/*.whl
+      - name: Verify installed starter away from checkout
+        working-directory: /tmp
+        run: nuluno-engine-community doctor
+      - name: Public core, artifact safety and contribution inspection
+        run: |
+          python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests tests.test_release_artifacts -v
+          python -m unittest discover -s community/tests -v
+          python community/method_pack.py community/examples/normalize-query --with-engine-kernel
+      - run: npm --prefix deploy/mcp-gateway ci --ignore-scripts --no-audit --no-fund
+      - name: Official MCP compatibility and persistent scope
+        run: node --test deploy/mcp-gateway/gateway.test.mjs deploy/mcp-gateway/compatibility.test.mjs
+      - name: Store artifacts for deliberate maintainer review
+        uses: actions/upload-artifact@v4
+        with:
+          name: community-release-readiness-${{ github.sha }}
+          path: |
+            dist/release-readiness/*.whl
+            dist/release-readiness/*-source.zip
+            dist/release-readiness/release-manifest.json
+            dist/release-readiness/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 14

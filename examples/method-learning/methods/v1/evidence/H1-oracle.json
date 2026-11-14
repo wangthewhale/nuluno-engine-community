@@ -1,0 +1,16 @@
+{
+  "source_body_sha256": "abbe5a465523a57c9dddd8383cde314b08d9b89be6ccecaa0ae2949c7e84fef8",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "selected-plan",
+      "quote": "Your selected plan\n$15/month\n· Up to 100,000 monthly pageviews · 50 sites included"
+    },
+    {
+      "id": "trial-condition",
+      "quote": "7-day free trial. Card required"
+    }
+  ]
+}

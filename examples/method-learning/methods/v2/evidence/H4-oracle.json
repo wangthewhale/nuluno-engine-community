@@ -1,0 +1,16 @@
+{
+  "source_body_sha256": "f95129058daefdc44b94be2277f552f481ec526a29126eafe45b7a4e3ddba88d",
+  "independent_from_candidate": true,
+  "author": "root-independent-review",
+  "basis": "Original frozen source text only; candidate and baseline outputs not inspected.",
+  "claims": [
+    {
+      "id": "standard-price",
+      "quote": "Standard\n$\n25\nper user/mo"
+    },
+    {
+      "id": "free-tier",
+      "quote": "Free plan\nincludes 5 users, 1 Inbox, and 1 Docs site."
+    }
+  ]
+}
