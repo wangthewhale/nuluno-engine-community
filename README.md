@@ -43,7 +43,7 @@ by Git. [Commands and recovery details](examples/source-brief/README.md).
 | Continue research after restarting an agent | Rerun with the same output folder | Same run/request/receipt and one reserved provider request |
 | Stop a worker that should no longer read | Add `--revoke` to the same command | Its original key receives 401; a later run remains denied |
 
-The [historical alpha.1 preflight receipt](docs/evidence/first-use-preflight-20261115.json) records the preceding operator-run macOS trial. It is retained with its original version and source hashes. It does not attest to this new combined alpha.2 code. New-version acceptance is recorded separately after execution. Public-data persistence is not an outside human trial, private-account acceptance or evidence of sales improvement.
+The [version-bound alpha.2 Linux receipt](docs/evidence/first-use-0.13.0a2-20261115.json) records the exact source commit, a real public GET, original-receipt reuse across separate service processes, original-key revocation and a later fresh process exiting with code 3. The [preceding preflight](docs/evidence/first-use-preflight-20261115.json) remains unchanged. These are operator-run technical checks, not external human adoption or sales improvement. Linux core CI also exercised an actual persistent container replacement.
 
 ## What the core contains
 

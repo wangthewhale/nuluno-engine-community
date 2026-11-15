@@ -26,8 +26,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
-          artifact-ids: '14114321822'
-          run-id: '43596408875'
+          artifact-ids: '14143008028'
+          run-id: '43668195543'
           repository: 'wangthewhale/nuluno-engine-community'
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/reviewed-preview
@@ -55,8 +55,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           merge-multiple: true
-          artifact-ids: '14114321822'
-          run-id: '43596408875'
+          artifact-ids: '14143008028'
+          run-id: '43668195543'
           repository: 'wangthewhale/nuluno-engine-community'
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/reviewed-preview
