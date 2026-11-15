@@ -9,7 +9,7 @@ body:
     id: version
     attributes:
       label: Version or commit
-      placeholder: "0.13.0a1 / exact commit"
+      placeholder: "0.13.0a2 / exact commit"
     validations:
       required: true
   - type: textarea

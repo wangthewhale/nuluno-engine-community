@@ -5,7 +5,7 @@ on:
       version:
         description: Version already recorded in pyproject.toml; this workflow does not bump it
         required: true
-        default: 0.13.0a1
+        default: 0.13.0a2
         type: string
   push:
     tags:
@@ -37,7 +37,7 @@ jobs:
         run: nuluno-engine-community doctor
       - name: Public core, artifact safety and contribution inspection
         run: |
-          python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests tests.test_release_artifacts -v
+          python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests tests.test_sdk_identity tests.test_release_artifacts -v
           python -m unittest discover -s community/tests -v
           python community/method_pack.py community/examples/normalize-query --with-engine-kernel
       - run: npm --prefix deploy/mcp-gateway ci --ignore-scripts --no-audit --no-fund

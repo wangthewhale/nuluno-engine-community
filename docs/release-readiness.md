@@ -11,7 +11,7 @@ After core, proposal-inspector and official MCP checks pass, the workflow stores
 Local preparation from a Git checkout:
 
 ```sh
-.venv/bin/python scripts/release_artifacts.py --expected-version 0.13.0a1 --output dist/release-readiness
+.venv/bin/python scripts/release_artifacts.py --expected-version 0.13.0a2 --output dist/release-readiness
 ```
 
 The output directory must be empty. The source commit is always `HEAD`; commit reviewed changes before expecting them in an artifact. A maintainer separately verifies the commit, source inventory, checksums, version and prerelease status, then deliberately publishes through the intended channel. Keep the commercial library outside this repository and these artifacts.

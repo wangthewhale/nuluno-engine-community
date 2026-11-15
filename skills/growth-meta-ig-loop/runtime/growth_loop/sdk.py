@@ -1,11 +1,48 @@
 """Small dependency-free client for the package's authenticated custom HTTP RPC."""
 import json
 import os
+import re
 from urllib.parse import urlparse
 from urllib.request import Request,build_opener
 from urllib.error import HTTPError
 from .transport import NoRedirect
 from .files import redact
+from . import __version__
+
+
+USER_AGENT = "Nuluno-Engine-Community/" + __version__ + " (+https://engine.nuluno.com)"
+MAX_ERROR_BYTES = 128 * 1024
+
+
+class GrowthTransportError(ValueError):
+    """Safe transport classification; raw edge pages and credentials never escape."""
+    def __init__(self, code, status, requires_owner_authorization=False):
+        super().__init__(code)
+        self.code = self.kind = code
+        self.status = status
+        self.requiresOwnerAuthorization = requires_owner_authorization
+
+
+def _client_identity_rejected(status, headers, body):
+    content_type = headers.get("Content-Type", "").split(";", 1)[0].strip().lower()
+    if status != 403 or content_type not in ("text/html", "application/xhtml+xml", "text/plain"):
+        return False
+    if content_type == "text/plain":
+        return "cloudflare" in headers.get("Server", "").lower() and bool(re.fullmatch(
+            r"\s*error(?:\s+code)?\s*[:#]?\s*1010\s*", body.decode("utf-8", errors="replace"), re.I))
+    text = re.sub(r"<[^>]*>", " ", body.decode("utf-8", errors="replace")).replace("&nbsp;", " ")
+    cloudflare = "cloudflare" in headers.get("Server", "").lower() or "cloudflare" in text.lower()
+    return cloudflare and bool(re.search(r"\berror(?:\s+code)?\s*[:#]?\s*1010\b", text, re.I))
+
+
+def _edge_rejected(status, headers, body):
+    content_type = headers.get("Content-Type", "").split(";", 1)[0].strip().lower()
+    if status != 403 or content_type not in ("text/html", "application/xhtml+xml") or headers.get("WWW-Authenticate"):
+        return False
+    text = body.decode("utf-8", errors="replace")
+    cloudflare = "cloudflare" in headers.get("Server", "").lower() or "cloudflare" in text.lower()
+    return cloudflare and bool(re.search(r"attention\s+required", text, re.I)) and bool(re.search(
+        r"data-translate\s*=\s*[\"']block_headline[\"']", text, re.I))
 
 
 class GrowthRPCError(ValueError):
@@ -14,6 +51,7 @@ class GrowthRPCError(ValueError):
         self.kind=error.get('kind','invalid_request')
         self.details=error.get('details',{})
         self.retry_after=error.get('retry_after')
+        self.requiresOwnerAuthorization=False
 
 
 class GrowthClient:
@@ -27,13 +65,23 @@ class GrowthClient:
     def call(self,method,**params):
         secret=os.environ.get(self.token_env)
         if not secret:raise ValueError('Missing operator token environment variable')
-        request=Request(self.url,data=json.dumps({'method':method,'params':params},allow_nan=False).encode(),headers={'Content-Type':'application/json','X-Growth-Worker':self.worker,'Authorization':'Bearer '+secret})
+        request=Request(self.url,data=json.dumps({'method':method,'params':params},allow_nan=False).encode(),headers={'Content-Type':'application/json','X-Growth-Worker':self.worker,'Authorization':'Bearer '+secret,'User-Agent':USER_AGENT})
         try:
             with build_opener(NoRedirect).open(request,timeout=self.timeout) as response:value=json.load(response)
         except HTTPError as exc:
-            if exc.code==401:raise ValueError('Worker authentication failed') from None
-            try:value=json.load(exc)
+            if exc.code==401:raise GrowthTransportError('transport_authorization_rejected',401,True) from None
+            raw=exc.read(MAX_ERROR_BYTES+1)
+            if len(raw)>MAX_ERROR_BYTES:raise GrowthTransportError('transport_response_too_large',exc.code) from None
+            if _client_identity_rejected(exc.code,exc.headers,raw):
+                raise GrowthTransportError('transport_client_identity_rejected',403,False) from None
+            if _edge_rejected(exc.code,exc.headers,raw):
+                raise GrowthTransportError('transport_edge_rejected',403,False) from None
+            try:value=json.loads(raw)
             except (ValueError,TypeError):raise ValueError('RPC request rejected') from None
+            if exc.code==403 and isinstance(value,dict) and isinstance(value.get('error'),dict):
+                error=GrowthRPCError(redact(value['error'],[secret]))
+                error.requiresOwnerAuthorization=error.kind in ('auth','authorization','authentication','invalid_key','scope_denied','forbidden')
+                raise error from None
         if 'error' in value:raise GrowthRPCError(redact(value['error'],[secret]))
         return value['result']
 

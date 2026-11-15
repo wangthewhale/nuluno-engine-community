@@ -1,0 +1,39 @@
+name: first-use-source-brief
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  actual-public-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: python -m venv .venv
+      - run: .venv/bin/python -m pip install .
+      - run: npm --prefix deploy/mcp-gateway ci --omit=dev --ignore-scripts
+      - name: Actual public source artifact
+        run: ENGINE_PYTHON=.venv/bin/python node examples/source-brief/brief.mjs --out source-brief
+      - name: New process, same source and receipt
+        run: ENGINE_PYTHON=.venv/bin/python node examples/source-brief/brief.mjs --out source-brief
+      - name: Revoke original key
+        run: ENGINE_PYTHON=.venv/bin/python node examples/source-brief/brief.mjs --out source-brief --revoke
+      - name: A later process remains denied
+        run: |
+          set +e
+          ENGINE_PYTHON=.venv/bin/python node examples/source-brief/brief.mjs --out source-brief
+          result=$?
+          set -e
+          test "$result" -eq 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sanitized-source-brief-receipts
+          path: |
+            source-brief/receipt-*.json
+            source-brief/revocation-*.json
+            source-brief/denial-*.json
+          if-no-files-found: error

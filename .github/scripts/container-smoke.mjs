@@ -15,7 +15,7 @@ const call=async(name,arguments_)=>unwrap(await client.callTool({name,arguments:
 try{
  docker(['volume','create',name]);
  const initialized=JSON.parse(docker(['run','--rm','--volume',name+':/var/lib/nuluno','--entrypoint','nuluno-engine-community',image,'init-service','--workspace','/var/lib/nuluno/state','--config','/var/lib/nuluno/service.json','--brand-url','https://product.example','--run-id','container-original']));
- start();assert.equal((await healthy()).version,'0.13.0a1');
+ start();assert.equal((await healthy()).version,'0.13.0a2');
  const permissions=JSON.parse(docker(['exec',name,'python','-c',"import os,json;s=os.stat('/var/lib/nuluno/service.json');print(json.dumps({'uid':os.getuid(),'config_uid':s.st_uid,'config_mode':oct(s.st_mode&0o777)}))"]));
  assert.equal(permissions.uid,10001);assert.equal(permissions.config_uid,10001);assert.equal(permissions.config_mode,'0o600');
  client=await connectClient(origin+'/mcp',token);
@@ -29,5 +29,5 @@ try{
  assert.equal((await client.callTool({name:'status',arguments:{run_id:'outside-scope'}})).isError,true);
  docker(['exec',name,'python','-c',"import json,os,tempfile;p='/var/lib/nuluno/service.json';d=json.load(open(p));d['workers']['external']['revoked']=True;fd,t=tempfile.mkstemp(dir='/var/lib/nuluno');os.write(fd,json.dumps(d).encode());os.fsync(fd);os.close(fd);os.chmod(t,0o600);os.replace(t,p)"]);
  await assert.rejects(()=>client.listTools());
- console.log(JSON.stringify({version:'0.13.0a1',installed_namespace:'nuluno_engine_community.growth_loop',actual_linux_container_boot:true,non_root_uid:10001,private_configuration:true,persistent_volume_replacement:true,original_run_and_memory_preserved:true,cross_run_denied:true,original_key_revoked:true,external_provider_calls:0,model_calls:0,sales_outcomes_claimed:false}));
+ console.log(JSON.stringify({version:'0.13.0a2',installed_namespace:'nuluno_engine_community.growth_loop',actual_linux_container_boot:true,non_root_uid:10001,private_configuration:true,persistent_volume_replacement:true,original_run_and_memory_preserved:true,cross_run_denied:true,original_key_revoked:true,external_provider_calls:0,model_calls:0,sales_outcomes_claimed:false}));
 }finally{await client?.close().catch(()=>{});try{docker(['rm','-f',name]);}catch{}try{docker(['volume','rm',name]);}catch{}}

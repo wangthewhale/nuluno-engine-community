@@ -6,7 +6,7 @@ Report vulnerabilities to **support@nuluno.com** with version, impact and a mini
 
 ## Scope and operator requirements
 
-Engine Community 0.13.0a1 preview is the maintained release discussed here. Nuluno Access is a separate product and permission boundary. Third-party hosts/platforms have their own policies. Protocol compatibility is not a client security audit.
+Engine Community 0.13.0a2 preview is the maintained release discussed here. Nuluno Access is a separate product and permission boundary. Third-party hosts/platforms have their own policies. Protocol compatibility is not a client security audit.
 
 - Treat model output, web content, tools and candidate methods as untrusted. They cannot grant themselves authority, spend limits or verified source status.
 - Store private config/SQLite on operator-controlled storage with restricted permissions, appropriate encryption and backups. Never commit service keys or platform tokens.

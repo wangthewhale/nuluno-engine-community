@@ -20,7 +20,8 @@ class ReleaseBoundaries(unittest.TestCase):
         self.assertEqual(release.safe_path('community/examples/normalize-query/program.json'),'community/examples/normalize-query/program.json')
     def test_only_reviewed_learning_demo_is_exportable_under_examples(self):
         self.assertEqual(release.safe_path('examples/method-learning/README.md'),'examples/method-learning/README.md')
-        for path in ('examples/unreviewed/program.py','examples/method-learning/private/source.json','examples/method-learning/source.sqlite3'):
+        for name in ('examples/source-brief/README.md','examples/source-brief/brief.mjs'):self.assertEqual(release.safe_path(name),name)
+        for path in ('examples/unreviewed/program.py','examples/source-brief/private.json','examples/method-learning/private/source.json','examples/method-learning/source.sqlite3'):
             with self.subTest(path=path),self.assertRaises(ValueError):release.safe_path(path)
     def test_version_and_tag_cannot_relabel_a_different_runtime(self):
         version='0.13.0a1'

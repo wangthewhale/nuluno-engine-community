@@ -13,7 +13,7 @@ def check(require_commercial=False):
     community=importlib.import_module('nuluno_engine_community.growth_loop')
     resources=importlib.import_module('nuluno_engine_community.growth_loop.resources')
     starter=resources.library_status()
-    assert community.__version__=='0.13.0a1' and starter['work_skills']==1 and starter['active_pack'] is None
+    assert community.__version__=='0.13.0a2' and starter['work_skills']==1 and starter['active_pack'] is None
     entrypoints={e.name for e in importlib.metadata.distribution('nuluno-engine-community').entry_points if e.group=='console_scripts'}
     assert entrypoints=={'nuluno-engine-community'}
     try:

@@ -18,7 +18,7 @@ jobs:
         working-directory: /tmp
         run: nuluno-engine-community doctor
       - name: Core bounded learning and public pack rejection checks
-        run: python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests -v
+        run: python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests tests.test_sdk_identity -v
       - run: npm --prefix deploy/mcp-gateway ci --ignore-scripts --no-audit --no-fund
       - name: Standard MCP, scope, state and compatibility
         run: node --test deploy/mcp-gateway/gateway.test.mjs deploy/mcp-gateway/compatibility.test.mjs

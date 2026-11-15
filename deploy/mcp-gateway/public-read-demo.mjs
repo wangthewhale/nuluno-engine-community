@@ -80,7 +80,7 @@ try {
   settings.tool_routes['public-source'].allowed_urls = [source.href];
   await writeFile(configPath, JSON.stringify(config), {mode: 0o600});
   stage = 'connect';
-  const health = await start(); assert.equal(health.version, '0.13.0a1');
+  const health = await start(); assert.equal(health.version, '0.13.0a2');
   client = await connectClient(origin + '/mcp', token);
   await call('run_create', {run_id: runId, profile: initialized.profile});
   const compatibility = await probeCompatibility(client, runId);

@@ -1,46 +1,85 @@
-# Nuluno Engine Community — 0.13.0a1 preview
+# Nuluno Engine Community
 
-An **Apache-2.0 executable core**, with a complete S01 product-research starter: persistent tasks, scoped MCP, source receipts, original-request reuse, recovery and bounded artifact learning. This is a prerelease community distribution, not a replacement for the sold Engine 0.12.0 package. Its installed Python namespace is `nuluno_engine_community.growth_loop`, so it does not overwrite the commercial `growth_loop` module. Use a dedicated virtual environment for a clean trial.
+**Keep an agent's work, evidence and next steps when its process stops.**
 
-The free starter contains one work method (S01) and its orchestrator. It does **not** contain the commercial 99-goal / 134-graph / 188-folder sales methods library. Those are separate data under their commercial license. Core execution and technical learning are present and usable without purchasing that library; no SDK-only placeholder is substituted for them.
+I built this because my agents could finish individual tool calls and still lose
+the larger job: repeat research, forget what was tried, or report a test as a
+business result. Engine keeps durable work, original source receipts and
+versioned method checks behind an MCP interface that you host.
+
+The Apache-2.0 community core includes the complete S01 public-product-research
+starter. Bring your own model and platform permissions for broader work.
+
+## First run: make something you can use
+
+Requires **Python 3.9+ and Node 20+**. No Nuluno account, model API key or social
+login is needed for this public-read example. Run from a new source checkout:
 
 ```sh
+git clone https://github.com/wangthewhale/nuluno-engine-community.git
+cd nuluno-engine-community
 python3 -m venv .venv
 .venv/bin/python -m pip install .
 npm --prefix deploy/mcp-gateway ci --omit=dev --ignore-scripts
-.venv/bin/nuluno-engine-community doctor
-ENGINE_PYTHON="$PWD/.venv/bin/python" node deploy/mcp-gateway/public-read-demo.mjs
+ENGINE_PYTHON=.venv/bin/python node examples/source-brief/brief.mjs \
+  --url https://www.python.org/ --out my-source-brief
 ```
 
-The demo performs a real unauthenticated public GET, reuses the original receipt, replaces its gateway process and checks the same saved run/note, rejects another read beyond its quota, and revokes the original key. It creates private temporary state and removes it on exit. There are no model calls, private inbox access, social writes or advertising spend. Network failures fail the run; fixtures are never substituted.
+Open **`my-source-brief/brief.md`**. It contains a real bounded source excerpt,
+the original URL, body hash and receipt ID. The source remains untrusted data;
+the excerpt can omit prices or conditions. The proof JSON records actual
+execution with unknown complete costs left unknown.
 
-Python 3.9+ and Node 20+ are declared requirements; actual runtime combinations are recorded in receipts. You provide models, a host/worker and platform permissions for broader tasks. Installation alone does not create an autonomous daemon or bypass consent/MFA/CAPTCHA. Missing costs remain unknown, not zero. Technical method adoption is not verified sales improvement.
+Run the last command again. A new service process opens the same saved run and
+returns its original receipt. It preserves the one-read quota instead of making
+a new task. Private local state stays inside the output folder and is ignored
+by Git. [Commands and recovery details](examples/source-brief/README.md).
 
-## Try it, then challenge it
+## Three things to try
 
-[Linux CI](https://github.com/wangthewhale/nuluno-engine-community/actions/workflows/ci.yml) actually boots a container and checks persistent state after replacement. The [anonymous public-clone receipt](docs/evidence/public-clone-2026-11-14.json) records a clean installation and a real public GET, receipt reuse, process replacement and revoked-key denial. These are technical checks, not completed sales goals.
+| Situation | Useful action | What you can verify |
+|---|---|---|
+| Collect evidence before writing about a product | Create a source brief for a public HTTPS page | URL, original observation and body/receipt hashes |
+| Continue research after restarting an agent | Rerun with the same output folder | Same run/request/receipt and one reserved provider request |
+| Stop a worker that should no longer read | Add `--revoke` to the same command | Its original key receives 401; a later run remains denied |
 
-Report a reproducible first-run problem through [Issues](https://github.com/wangthewhale/nuluno-engine-community/issues/new/choose), or submit a scoped [method proposal](CONTRIBUTING.md). Never attach secrets or customer data. A community proposal can be inspected without being authorized or adopted.
+The [historical alpha.1 preflight receipt](docs/evidence/first-use-preflight-20261115.json) records the preceding operator-run macOS trial. It is retained with its original version and source hashes. It does not attest to this new combined alpha.2 code. New-version acceptance is recorded separately after execution. Public-data persistence is not an outside human trial, private-account acceptance or evidence of sales improvement.
 
-## Real method experiments, including the failures
+## What the core contains
 
-[Three frozen AI-authored proposals](examples/method-learning/README.md) were evaluated on nine real public sources. The third candidate retained 7/9 independently required facts versus the prefix baseline's 2/9, but still missed two required facts. The original gate rejected it. All three failures, original criteria, source hashes and replay instructions are retained. V2 and V3 used the installed Community 0.13.0a1 wrapper; V1 used the original 0.12 kernel. All three were rejected by the host source-quality gate before native adoption. No live adoption, sales improvement or model-weight training is claimed.
+- Persistent tasks, scoped worker authority, source evidence and cost unknowns.
+- Standard MCP through an independently hosted gateway.
+- Bounded artifact proposals, validation, adoption and rollback mechanisms.
+- An operator-controlled installer for separately licensed, data-only methods.
 
-## Separately acquired commercial methods
+The full **99-goal / 134-graph / 188-folder** commercial library is separate from
+this free starter. Installation provides no platform credentials or running
+model worker. The current community version is **0.13.0a2**, using the isolated
+`nuluno_engine_community.growth_loop` namespace; existing commercial releases
+and their customer rights remain separate.
 
-Obtain the data-only pack and its SHA-256 from a delivery record you trust. The installer checks integrity, identity, file paths, data schema and complete skill/graph dependencies. A self-authored manifest does not prove payment or authenticity. The operator must have the legal right to use the pack.
+## Learning includes rejecting a bad method
 
-```sh
-.venv/bin/nuluno-engine-community method-pack-install \
-  --archive /path/to/licensed-methods.zip \
-  --sha256 THE_SHA256_FROM_YOUR_DELIVERY_RECORD \
-  --directory /absolute/operator-owned/method-packs
-NULUNO_METHOD_PACK_DIR=/absolute/operator-owned/method-packs \
-  .venv/bin/nuluno-engine-community doctor
-```
+We froze three AI-authored method proposals and tested them on nine real public
+sources. V3 retained 7/9 required facts versus its prefix baseline's 2/9, but
+missed two necessary facts. Every proposal was rejected before adoption.
+[All failures, criteria and replay instructions are public](examples/method-learning/README.md).
 
-Set the same `NULUNO_METHOD_PACK_DIR` on the MCP gateway/worker process. The pack is data, never executable code or authority configuration. Installation does not change an existing run, grant platform access, start actions or relicense commercial content. New Python invocations load the atomically selected valid library; restart long-lived Python clients after a pack change.
+That experiment does not establish unattended method generation, model-weight
+training, sales lift or a complete-cost advantage. A useful next contribution
+is a reproducible failure and a new method with independently evaluated evidence.
 
-Inspect [the evidence and comparison limits](docs/benchmark.md).
+## Help improve the first task
 
-See [the full S01 starter](docs/S01-starter.md), [independent deployment](docs/deployment.md), [pack format and trust](docs/method-packs.md), [security](SECURITY.md), [contributing](CONTRIBUTING.md) and [third-party notices](THIRD_PARTY.md).
+If installation fails, open a [first-run issue](https://github.com/wangthewhale/nuluno-engine-community/issues/new/choose)
+with your runtime versions, failed step and sanitized receipt. Keep keys, state
+folders and customer data private. There is no automatic telemetry or background
+daemon in this example.
+
+[Technical guide](docs/technical-guide.md) · [S01 procedure](docs/S01-starter.md) ·
+[Deployment](docs/deployment.md) · [Method packs](docs/method-packs.md) ·
+[Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [License](LICENSE)
+
+## Client identity and authorization
+
+The SDK identifies its actual Nuluno Community version. A confirmed Cloudflare 403 / Error 1010 is reported as `transport_client_identity_rejected` with `requiresOwnerAuthorization: false`; it is a transport identity problem. Structured invalid-key, revoked-key and scope-denial responses remain authorization failures. This classification never renews a key, expands a grant or retries a possibly dispatched POST.

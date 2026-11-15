@@ -1,6 +1,6 @@
 {
   "schema": "nuluno-community-distribution-v1",
-  "version": "0.13.0a1",
+  "version": "0.13.0a2",
   "starter_skill_ids": [
     "S01"
   ],
