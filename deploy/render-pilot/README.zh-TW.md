@@ -89,13 +89,13 @@ ENGINE_RESTORE_REQUEST_ID=<新的UUID>
 
 ## 實際驗收界線
 
-本機受控 SQLite 測試核了首次開機、重啟、原 quota/task、換key/scope拒絕、撤銷、partial boot、線上備份及一次性恢復；Render尚未建立，這份新 Docker image尚未在 Linux build/boot。既有 public Engine CI的Linux container replacement只能當 baseline，不能寫成此 Render部署已驗收。授權費用後，還要真核 HTTPS/MCP、持久 disk、同 run公開任務、restart、原收據復用、revoke後401及備份恢復。
+2026-11-16 已實際完成新 Docker image 的 Linux build/boot，並用官方 MCP 客戶端讀真實來源、重建 container、復用原收據、撤銷及還原舊備份後持續拒絕原 key。[原生執行紀錄](https://github.com/wangthewhale/nuluno-engine-community/actions/runs/43846581732)，[逐步結果](../../docs/evidence/render-pilot-linux-20261116.json)。Render 服務尚未建立；這不是 Render TLS、磁碟或計費驗收。授權費用後，仍須在實際 Render 主機核對 HTTPS/MCP、持久磁碟、原 run/receipt、restart、撤銷後401及備份恢復。
 
 這裡也沒有多租戶 isolation、hosted任意產品job provisioning、模型呼叫佇列、完整成本帳單、native conversion ingestion、採用贏家或銷售成效證明。這些不是把一個MCP服務常駐就會自動完成。
 
 ## 新增 cloud 費用前的 Linux CI gate
 
-`.github/workflows/render-pilot-check.yml` 只在addon、workflow變更或手動操作時執行，沒有Render API或帳號secret。它實際build此Dockerfile，再在新image執行16個SQLite生命週期與同步順序測試。`tests/container-smoke.mjs` 用一次性隨機CI key、單一named volume及0.5CPU／512MB，走image內官方 `@modelcontextprotocol/client`：
+`.github/workflows/render-pilot-check.yml` 只在addon、workflow變更或手動操作時執行，沒有Render API或帳號secret。它實際build此Dockerfile，再在新image執行18個SQLite生命週期與同步順序測試。`tests/container-smoke.mjs` 用一次性隨機CI key、單一named volume及0.5CPU／512MB，走image內官方 `@modelcontextprotocol/client`：
 
 1. 真掛載、非root開機；錯Host、外部Origin仍403。
 2. 僅讀自有來源 `https://engine.nuluno.com/?lang=en`；原SQLite來源ledger必須1次／12額度，原回應HTTP200且無轉址。平台阻擋就讓CI失敗，不改來源、換key或拿fixture代替。
@@ -103,7 +103,7 @@ ENGINE_RESTORE_REQUEST_ID=<新的UUID>
 4. 真線上SQLite備份；撤銷原key、重建container後原key仍401，沒有新GET或恢復額度。
 5. 從較舊、仍active的備份恢復，也必須鎖住原key；相同restore request下次boot不得再恢復或抹掉恢復後marker。
 
-CI傳輸是localhost HTTP搭配固定canonical Host，模擬TLS終止代理後請求；production origin仍只允HTTPS，沒有放寬Host／Origin。它不驗證Render TLS、Render SSD、計費或多使用者負載，不代表服務已上線。在CI有實際綠燈與原生receipt前，此addon只是可審查配置。
+CI傳輸是localhost HTTP搭配固定canonical Host，模擬TLS終止代理後請求；Node `fetch` 會忽略自訂 Host，因此測試透過官方 SDK 支援的 custom fetch，用限定 loopback 的 Node HTTP 傳輸保留指定標頭，另有真 HTTP 回歸檢查。production origin仍只允HTTPS，沒有放寬Host／Origin。它不驗證Render TLS、Render SSD、計費或多使用者負載，不代表服務已上線。第一次 Linux 執行曾抓到還原順序缺陷（先清原 WAL 再 fsync staged DB），第二次則發現上述測試傳輸問題；兩次失敗均保留，沒有替換來源、key或fixture來讓驗收通過。
 
 ## 備份的一致性邊界
 

@@ -1,0 +1,96 @@
+{
+  "schema": "nuluno-render-pilot-linux-acceptance-v1",
+  "status": "passed",
+  "observedAt": "2026-11-16T10:11:53.552Z",
+  "deployment_source_commit": "38415558d289cc94c0e084075325ef0eee9ad4a3",
+  "engine_source_commit": "c54f19d8fa833988e1fba3b5ae265fcc5acbcd16",
+  "disposable_config": true,
+  "single_owner": true,
+  "single_product": true,
+  "multi_tenant": false,
+  "model_worker": false,
+  "render_service_created": false,
+  "render_tls_tested": false,
+  "new_subscription": false,
+  "external_platform_writes": 0,
+  "model_calls": 0,
+  "full_cost": null,
+  "source_url": "https://engine.nuluno.com/?lang=en",
+  "source_gets": 1,
+  "quota_limit": 12,
+  "container_memory_limit_mb": 512,
+  "container_cpu_limit": 0.5,
+  "steps": [
+    {
+      "name": "first_boot",
+      "actual_linux_image_boot": true,
+      "pid1_uid": 10001,
+      "state_volume": true,
+      "strict_host_and_origin": true,
+      "outside_run_denied": true
+    },
+    {
+      "name": "one_real_public_source",
+      "official_client": true,
+      "source_http_status": 200,
+      "receipt_id": "6e5a5bd7534700224e8ac1e73c4359b151f293f6b3030054c4e80cda9f9edc2c",
+      "source_gets": 1,
+      "quota_limit": 12
+    },
+    {
+      "name": "same_volume_replacement",
+      "original_owner_unchanged": true,
+      "original_tasks_unchanged": true,
+      "original_receipt_reused": true,
+      "source_gets": 1,
+      "quota_limit": 12
+    },
+    {
+      "name": "consistent_online_backup",
+      "sqlite_online_backup": true,
+      "raw_wal_copied": false,
+      "archive_sha256": "25c87daf4e9b77ada1998a06abe00a9fd78401e4ab9acbb2c18667f2fffbc68f",
+      "root_shell_drops_to_owner_uid": true
+    },
+    {
+      "name": "revoke_original_key",
+      "native_denial_status": 401,
+      "new_key_created": false,
+      "source_gets": 1
+    },
+    {
+      "name": "revoked_volume_replacement",
+      "native_denial_status": 401,
+      "source_gets": 1,
+      "revocation_survives_replacement": true
+    },
+    {
+      "name": "old_backup_restores_locked",
+      "native_denial_status": 401,
+      "restored_old_active_config_still_revoked": true,
+      "original_receipt_preserved": true,
+      "source_gets": 1
+    },
+    {
+      "name": "restore_request_not_repeated",
+      "post_restore_marker_preserved": true,
+      "native_denial_status": 401,
+      "source_gets": 1,
+      "no_every_boot_restore_or_quota_reset": true
+    }
+  ],
+  "source_count_basis": "Original public_read_requests.attempts. Failed attempts are not claimed successful HTTP; a passed read requires native200 and no redirect. Dependency/setup downloads are separate.",
+  "lastHealthFailureKind": "Error",
+  "lastHealthStatus": 200,
+  "source_receipt": {
+    "url": "https://engine.nuluno.com/?lang=en",
+    "status": 200,
+    "body_sha256": "326240399c3a9598cdd4b721507019882341bce9e17d7eddf85b2254e2ccd99b",
+    "receipt_id": "6e5a5bd7534700224e8ac1e73c4359b151f293f6b3030054c4e80cda9f9edc2c",
+    "classification": "live_public_source",
+    "source_http_requests": 1
+  },
+  "actual_linux_container_replacement": true,
+  "original_key_remains_denied": true,
+  "no_fixture_substitution": true
+}

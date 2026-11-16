@@ -59,6 +59,15 @@ and receipt. Revoke that worker and confirm that the same key stays denied.
 [Inspect the 2026-11-15 proof](docs/evidence/first-use-anonymous-alpha2-20261115.json) ·
 [Anonymous run of published source (2026-11-16)](docs/evidence/one-command-published-20261116.json)
 
+**Linux deployment check:** an official MCP client read the actual product page
+once, replaced the container on the same volume, reused the original receipt,
+and confirmed the original key stayed denied after revocation and recovery of
+an older backup. [Inspect the native run](https://github.com/wangthewhale/nuluno-engine-community/actions/runs/43846581732)
+and [its recorded result](docs/evidence/render-pilot-linux-20261116.json).
+[Deploy the reviewed single-owner pilot](deploy/render-pilot/README.zh-TW.md)
+on your own host. This checks real runtime continuity; it is not a hosted
+service, a background model worker or evidence of improved sales.
+
 ![Recorded Engine read, restart, original-receipt reuse and revoked-key denial](docs/images/first-use-proof.svg)
 
 *Recorded 2026-11-15 · macOS/arm64 · operator run.*
@@ -76,9 +85,6 @@ The free Apache-2.0 core includes the S01 public-product-research starter,
 persistent work, MCP and bounded method checks. Bring your own model/host and
 actual platform authority for broader tasks. The separately licensed sales
 library is not required for this public trial.
-
-
-[Anonymous GitHub install + Codex-authored Notavue campaign](docs/evidence/campaign-notavue-anonymous-20261116.json): one original source read, two product-specific angle hypotheses, the same saved campaign after restart, and original-key denial after revocation. Maintainer-run technical evidence; no customer acquisition or sales lift is claimed.
 
 ## From a URL to something you can review
 
@@ -108,7 +114,7 @@ the exact candidate format. A running operator gateway is required.
 
 ## First run: make something you can use
 
-Requires **Python 3.9+ and Node 20+**. No Nuluno account, model API key or social
+Requires **Python 3.9+ and Node 24+**. No Nuluno account, model API key or social
 login is needed for this public-read example. Run from a new source checkout:
 
 ```sh
