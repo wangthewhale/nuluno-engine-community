@@ -1,0 +1,36 @@
+# Review candidate. Importing this Blueprint creates BILLABLE resources.
+# Blueprint path: deploy/render-pilot/render.yaml in the reviewed community repo.
+services:
+  - type: web
+    name: nuluno-engine-pilot
+    runtime: docker
+    plan: 0.5c-512mb
+    region: singapore
+    numInstances: 1
+    autoDeployTrigger: "off"
+    dockerfilePath: ./deploy/render-pilot/Dockerfile
+    dockerContext: ./deploy/render-pilot
+    healthCheckPath: /healthz
+    disk:
+      name: engine-state
+      mountPath: /state
+      sizeGB: 1
+    envVars:
+      - key: ENGINE_PILOT_BEARER
+        sync: false
+      - key: ENGINE_PRODUCT_URL
+        sync: false
+      - key: ENGINE_SOURCE_URLS_JSON
+        sync: false
+      - key: ENGINE_PUBLIC_READ_LIMIT
+        value: "12"
+      - key: ENGINE_RUN_ID
+        value: pilot-product
+      - key: ENGINE_STATE_DIR
+        value: /state
+      - key: ENGINE_BACKUP_INTERVAL_SECONDS
+        value: "86400"
+      - key: ENGINE_BACKUP_KEEP
+        value: "3"
+      - key: PORT
+        value: "10000"

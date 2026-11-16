@@ -1,0 +1,11 @@
+official/
+tests/
+evidence/
+*.json
+*.tar.gz
+*.zip
+.private/
+__pycache__/
+*.pyc
+.env
+.env.*

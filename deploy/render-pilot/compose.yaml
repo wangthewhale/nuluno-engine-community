@@ -1,0 +1,25 @@
+# Self-hosted alternative; requires an operator-controlled always-on Linux host.
+services:
+  engine:
+    build: .
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 0.5
+    pids_limit: 128
+    ports:
+      - "127.0.0.1:18788:10000"
+    environment:
+      ENGINE_PILOT_BEARER: ${ENGINE_PILOT_BEARER:?Set privately; never commit}
+      ENGINE_PRODUCT_URL: ${ENGINE_PRODUCT_URL:?Set the actual HTTPS product URL}
+      ENGINE_SOURCE_URLS_JSON: ${ENGINE_SOURCE_URLS_JSON:-}
+      ENGINE_PUBLIC_READ_LIMIT: "12"
+      ENGINE_RUN_ID: pilot-product
+      ENGINE_STATE_DIR: /state
+      ENGINE_PUBLIC_ORIGIN: ${ENGINE_PUBLIC_ORIGIN:?Set the one actual HTTPS origin served by your reverse proxy}
+      ENGINE_BACKUP_INTERVAL_SECONDS: "86400"
+      ENGINE_BACKUP_KEEP: "3"
+      PORT: "10000"
+    volumes:
+      - engine-state:/state
+volumes:
+  engine-state:

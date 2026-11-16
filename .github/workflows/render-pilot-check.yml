@@ -1,0 +1,41 @@
+name: render-pilot-check
+on:
+  push:
+    paths:
+      - deploy/render-pilot/**
+      - .github/workflows/render-pilot-check.yml
+  workflow_dispatch: {}
+permissions:
+  contents: read
+concurrency:
+  group: render-pilot-check-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  linux-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Build pinned Engine and reviewed deployment adapter
+        run: docker build --file deploy/render-pilot/Dockerfile --tag nuluno-engine-render-pilot:ci deploy/render-pilot
+      - name: Real SQLite lifecycle and backup/recovery regressions in Linux image
+        run: >-
+          docker run --rm --entrypoint python
+          --mount type=bind,source=${{ github.workspace }}/deploy/render-pilot,target=/opt/pilot,readonly
+          nuluno-engine-render-pilot:ci
+          -m unittest discover -s /opt/pilot/tests -p test_pilot.py -v
+      - name: Actual mount, official MCP public read, replacement, revoke and locked recovery
+        env:
+          ENGINE_PILOT_SMOKE_IMAGE: nuluno-engine-render-pilot:ci
+        run: node deploy/render-pilot/tests/container-smoke.mjs
+      - name: Preserve redacted actual result, including failure stage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-pilot-linux-${{ github.sha }}
+          path: deploy/render-pilot/evidence/docker-smoke.json
+          if-no-files-found: ignore
+          retention-days: 30

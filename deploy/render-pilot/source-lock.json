@@ -1,0 +1,34 @@
+{
+  "schema": "nuluno-cloud-pilot-source-lock-v1",
+  "observed_at": "2026-11-16T07:58:25.300744+00:00",
+  "engine_repository": "https://github.com/wangthewhale/nuluno-engine-community",
+  "engine_source_commit": "c54f19d8fa833988e1fba3b5ae265fcc5acbcd16",
+  "source_archive_url": "https://codeload.github.com/wangthewhale/nuluno-engine-community/tar.gz/c54f19d8fa833988e1fba3b5ae265fcc5acbcd16",
+  "source_archive_sha256": "1150a1719a2cd46e7f60288f3fe78a24cb83d59ee1622c7f9ae93e7ceca75f72",
+  "source_archive_bytes": 392493,
+  "baseline_public_ci": "https://github.com/wangthewhale/nuluno-engine-community/actions/runs/43822829139",
+  "baseline_ci_reported_success_by_parent": true,
+  "baseline_is_not_new_pilot_image_acceptance": true,
+  "image_locks": [
+    {
+      "image": "node",
+      "tag": "24-bookworm-slim",
+      "digest": "sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+      "last_updated": "2026-11-11T20:39:58.583762Z",
+      "linux_amd64": [
+        "sha256:0e2646ab57e77b7a384a0cb59b6815b182c77e1f9c3ba36bd8435bd9c4e6680e"
+      ]
+    },
+    {
+      "image": "python",
+      "tag": "3.11-slim-bookworm",
+      "digest": "sha256:a83ba18aef0f865b1a4a611c2cf460fe446f2795673bbb9fe43be570439e3b39",
+      "last_updated": "2026-11-05T17:06:44.808385Z",
+      "linux_amd64": [
+        "sha256:e8c69d86735f6df3efa06b324694fe51f0422785f83a3bd463052636c2421944"
+      ]
+    }
+  ],
+  "pricing_source": "https://render.com/pricing",
+  "pricing_html_sha256": "bc7dd19706197489e608dc05068bfd32f0f64759f158a5743ea2c97a013d235c"
+}
