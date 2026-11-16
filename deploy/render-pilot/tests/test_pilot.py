@@ -1,5 +1,6 @@
 """Real local SQLite lifecycle; no Render service, Docker claim or provider call."""
 import copy
+import contextlib
 import importlib.util
 import io
 import json
@@ -204,6 +205,41 @@ class PilotLifecycle(unittest.TestCase):
         self.assertEqual((self.root/'service.json').read_bytes(), before_config)
         self.assertEqual(pilot.read(self.root/'restore-journal.json')['requests'][env['ENGINE_RESTORE_REQUEST_ID']]['state'], 'pending')
         self.assertTrue(self.prepare()['revoked'])
+
+    def test_restore_staging_failure_preserves_live_committed_wal_and_readable_rows(self):
+        env = self.restore_fixture(); writer = self.db()
+        try:
+            writer.execute('PRAGMA journal_mode=WAL'); writer.execute('PRAGMA wal_autocheckpoint=0')
+            writer.execute('UPDATE durability_marker SET value="committed-in-live-wal"'); writer.commit()
+            workspace = self.root/'workspace'
+            before = {name: (workspace/name).read_bytes() for name in ('workflow.sqlite3', 'workflow.sqlite3-wal', 'workflow.sqlite3-shm')}
+            self.assertGreater(len(before['workflow.sqlite3-wal']), 0)
+            with patch.object(pilot, 'fsync_file', side_effect=OSError('controlled staged database fsync failure')):
+                with self.assertRaises(OSError):
+                    with pilot.lock(self.root, '.runtime.lock', True): pilot.restore(self.root, env)
+            for name, raw in before.items(): self.assertEqual((workspace/name).read_bytes(), raw)
+            self.assertEqual(list(workspace.glob('.restored-*')), [])
+            with contextlib.closing(self.db()) as fresh:
+                self.assertEqual(fresh.execute('SELECT value FROM durability_marker').fetchone()[0], 'committed-in-live-wal')
+            self.assertTrue(self.prepare()['revoked'])
+            self.assertEqual(writer.execute('SELECT value FROM durability_marker').fetchone()[0], 'committed-in-live-wal')
+        finally: writer.close()
+
+    def test_restore_busy_wal_aborts_before_replace_and_same_request_resumes_after_reader_closes(self):
+        env = self.restore_fixture(); reader = self.db(); writer = self.db()
+        try:
+            reader.execute('BEGIN'); reader.execute('SELECT value FROM durability_marker').fetchone()
+            writer.execute('UPDATE durability_marker SET value="after-reader-started"'); writer.commit()
+            with self.assertRaisesRegex(ValueError, 'pilot_restore_original_database_busy'):
+                with pilot.lock(self.root, '.runtime.lock', True): pilot.restore(self.root, env)
+            self.assertEqual(writer.execute('SELECT value FROM durability_marker').fetchone()[0], 'after-reader-started')
+            self.assertEqual(pilot.read(self.root/'restore-journal.json')['requests'][env['ENGINE_RESTORE_REQUEST_ID']]['state'], 'pending')
+            self.assertTrue(pilot.read(self.root/'revocation.json')['revoked'])
+            self.assertEqual(list((self.root/'workspace').glob('.restored-*')), [])
+        finally: reader.close(); writer.close()
+        with pilot.lock(self.root, '.runtime.lock', True): self.assertTrue(pilot.restore(self.root, env)['restored'])
+        self.assertTrue(self.prepare()['revoked'])
+        with contextlib.closing(self.db()) as fresh: self.assertEqual(fresh.execute('SELECT value FROM durability_marker').fetchone()[0], 'before')
 
     def test_restore_database_directory_sync_failure_keeps_pending_and_can_resume_same_request(self):
         env = self.restore_fixture(); before_config = (self.root/'service.json').read_bytes(); sync = pilot.fsync_directory

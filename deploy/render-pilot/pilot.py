@@ -295,11 +295,31 @@ def restore(root, env):
             atomic(root/'revocation.json', {'revoked': True, 'reason': 'offline_restore_requires_owner_reconciliation', 'restore_request_id': request_id, 'at': time.time()})
             journal['requests'][request_id] = {'state': 'pending', 'archive_sha256': archive_sha}; atomic(journal_path, journal)
             workspace = directory(root/'workspace', create=True)
-            for suffix in ('-wal', '-shm', '-journal'):
-                old = workspace/('workflow.sqlite3'+suffix)
-                if regular(old, missing=True): old.unlink()
             staged = workspace/('.restored-'+uuid.uuid4().hex+'.sqlite3'); shutil.copyfile(temp/'workflow.sqlite3', staged); os.chmod(staged, 0o600)
-            fsync_file(staged); replace_durable(staged, workspace/'workflow.sqlite3')
+            try:
+                # Until the replacement is staged and durable the original DB
+                # and its journals must remain untouched. Deleting a live WAL
+                # here loses committed rows if staging/fsync later fails.
+                fsync_file(staged)
+                original = workspace/'workflow.sqlite3'; regular(original)
+                for suffix in ('-wal', '-shm', '-journal'): regular(workspace/('workflow.sqlite3'+suffix), missing=True)
+                live = sqlite3.connect(str(original), timeout=0)
+                try:
+                    checkpoint = live.execute('PRAGMA wal_checkpoint(TRUNCATE)').fetchone()
+                    if checkpoint[0] != 0: reject('pilot_restore_original_database_busy')
+                    if live.execute('PRAGMA quick_check').fetchone()[0] != 'ok': reject('pilot_restore_original_database_invalid')
+                finally: live.close()
+                # The runtime is stopped under .runtime.lock. Checkpoint and
+                # sync the old DB before removing now-empty journal sidecars,
+                # so interruption before replace leaves a usable original.
+                fsync_file(original)
+                for suffix in ('-wal', '-shm', '-journal'):
+                    old = workspace/('workflow.sqlite3'+suffix)
+                    if regular(old, missing=True): old.unlink()
+                fsync_directory(workspace)
+                replace_durable(staged, original)
+            finally:
+                if staged.exists(): staged.unlink()
             restored_config = read(temp/'service.json'); restored_config['workers'][WORKER]['revoked'] = True
             atomic(root/'service.json', restored_config); atomic(workspace/'initial-profile.json', read(temp/'workspace/initial-profile.json'))
             journal['requests'][request_id]['state'] = 'complete'; atomic(journal_path, journal)
