@@ -11,7 +11,7 @@ COPY --from=gateway /gateway /opt/nuluno-gateway
 WORKDIR /build
 COPY . .
 RUN python -m pip install --no-cache-dir . \
-    && cp deploy/mcp-gateway/server.mjs /opt/nuluno-gateway/ \
+    && cp deploy/mcp-gateway/server.mjs deploy/mcp-gateway/contract-view.mjs /opt/nuluno-gateway/ \
     && useradd --uid 10001 --create-home engine \
     && mkdir -p /var/lib/nuluno && chown engine:engine /var/lib/nuluno \
     && rm -rf /build

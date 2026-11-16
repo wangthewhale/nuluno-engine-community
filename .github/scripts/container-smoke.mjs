@@ -20,6 +20,7 @@ try{
  assert.equal(permissions.uid,10001);assert.equal(permissions.config_uid,10001);assert.equal(permissions.config_mode,'0o600');
  client=await connectClient(origin+'/mcp',token);
  await call('run_create',{run_id:'container-original',profile:initialized.profile});
+ const discovered=await client.callTool({name:'contract',arguments:{run_id:'container-original'}}),contract=unwrap(discovered);assert.equal(contract.schema,'growth-host-contract-v1');assert.deepEqual(contract.library_inventory.installed_work_skill_ids,['S01']);assert.equal(contract.library_inventory.channel_catalog_installed,false);assert.equal(contract.worker_scope.allow_evolution,false);assert.ok(Buffer.byteLength(JSON.stringify(discovered))<=65536);const next=contract.next_actions.find(item=>item.tool==='cost_summary');assert.ok(next);const costs=await call(next.tool,next.arguments);assert.equal(costs.full_cost_minor,null);
  const catalog=await call('catalog',{run_id:'container-original'});assert.equal(catalog.total,1);assert.equal(catalog.library.active_pack,null);
  await call('memory_add',{run_id:'container-original',kind:'controlled_container_smoke',body:{sources:['https://product.example'],observed_at:Date.now()/1000,classification:'controlled_no_external_source_or_sale'}});
  const before=await call('status',{run_id:'container-original'});
@@ -29,5 +30,5 @@ try{
  assert.equal((await client.callTool({name:'status',arguments:{run_id:'outside-scope'}})).isError,true);
  docker(['exec',name,'python','-c',"import json,os,tempfile;p='/var/lib/nuluno/service.json';d=json.load(open(p));d['workers']['external']['revoked']=True;fd,t=tempfile.mkstemp(dir='/var/lib/nuluno');os.write(fd,json.dumps(d).encode());os.fsync(fd);os.close(fd);os.chmod(t,0o600);os.replace(t,p)"]);
  await assert.rejects(()=>client.listTools());
- console.log(JSON.stringify({version:'0.13.0a2',installed_namespace:'nuluno_engine_community.growth_loop',actual_linux_container_boot:true,non_root_uid:10001,private_configuration:true,persistent_volume_replacement:true,original_run_and_memory_preserved:true,cross_run_denied:true,original_key_revoked:true,external_provider_calls:0,model_calls:0,sales_outcomes_claimed:false}));
+ console.log(JSON.stringify({version:'0.13.0a2',installed_namespace:'nuluno_engine_community.growth_loop',actual_linux_container_boot:true,actual_contract_discovery:true,contract_bytes:Buffer.byteLength(JSON.stringify(discovered)),suggested_cost_read:true,full_cost:null,non_root_uid:10001,private_configuration:true,persistent_volume_replacement:true,original_run_and_memory_preserved:true,cross_run_denied:true,original_key_revoked:true,external_provider_calls:0,model_calls:0,sales_outcomes_claimed:false}));
 }finally{await client?.close().catch(()=>{});try{docker(['rm','-f',name]);}catch{}try{docker(['volume','rm',name]);}catch{}}
