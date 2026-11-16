@@ -1,9 +1,10 @@
 """Read-only host discovery and brand-scoped execution readiness diagnostics."""
 import math
 from .channels import channel_catalog, channel_skill
-from .contracts import CAPABILITIES, ALLOWED_ACTIONS, _proof
+from .contracts import CAPABILITIES, ALLOWED_ACTIONS, _proof, blueprint
 from .files import read_json
 from .errors import Waiting, WorkflowError
+from .resources import library_status, bundle_root, reference
 
 VERSION='0.9.1'
 
@@ -11,8 +12,25 @@ VERSION='0.9.1'
 def host_contract():
     from .service import METHODS, input_schema, MCP_VERSIONS
     from . import __version__
-    catalog=channel_catalog()
-    capabilities=sorted({c for values in CAPABILITIES.values() for c in values}|{s['capability'] for s in catalog['channel_skills']})
+    # The genuine community wheel ships S01, not a fake empty paid catalog.
+    # Absence is valid only when the distribution manifest explicitly describes
+    # the installed starter. An active licensed library missing its catalog is
+    # an integrity/configuration error and must not be downgraded to a starter.
+    status=library_status()
+    installed_ids={skill['id'] for skill in blueprint()['skills']}
+    if any(ident not in CAPABILITIES for ident in installed_ids):
+        raise ValueError('installed_skill_capability_contract_missing')
+    catalog_path=reference('channel-catalog.json')
+    if catalog_path.is_file():
+        catalog=read_json(catalog_path)
+        channel_skills=catalog['channel_skills']
+    else:
+        manifest_path=bundle_root()/'community.json'
+        manifest=read_json(manifest_path) if manifest_path.is_file() else {}
+        if status['active_pack'] is not None or manifest.get('schema')!='nuluno-community-distribution-v1' or manifest.get('full_methods_pack_included') is not False or not isinstance(manifest.get('starter_skill_ids'),list) or set(manifest['starter_skill_ids'])!=installed_ids:
+            raise ValueError('installed_channel_catalog_missing')
+        channel_skills=[]
+    capabilities=sorted({c for ident in installed_ids for c in CAPABILITIES[ident]}|{s['capability'] for s in channel_skills})
     return {'schema':'growth-host-contract-v1','version':VERSION,'engine_version':__version__,'product':'Nuluno Engine','model_neutral':True,
         'autonomous_evolution':{'controller':'nuluno-evolution-1','configure':'operator config: allow_evolution and evolution.enabled',
             'execution':'existing acquire cycle or evolution_tick; no second scheduler',
@@ -22,6 +40,11 @@ def host_contract():
             'weights_updated':False,'business_success_inferred':False},
         'interfaces':{'skill_files':'host reads SKILL.md and can execute local commands','cli':'JSON stdout; nonzero exit is failure','mcp_stdio':{'versions':MCP_VERSIONS,'transport':'newline JSON-RPC over local stdio'},'mcp_streamable_http':{'path':'/mcp','adapter':'deploy/mcp-gateway/server.mjs','authentication':'independent operator-issued worker Bearer','nuluno_com_required':False},'http_rpc':{'path':'/rpc','authentication':'Bearer token and X-Growth-Worker; custom RPC, not Streamable HTTP MCP'}},
         'capabilities':capabilities,'methods':{name:input_schema(name) for name in METHODS},
+        'library_inventory':{'edition':status['edition'],'installed_work_skill_ids':sorted(installed_ids),
+            'active_data_pack_installed':status['active_pack'] is not None,'channel_catalog_installed':catalog_path.is_file(),
+            'installed_channel_skill_count':len(channel_skills),'platform_execution_skills_included':bool(channel_skills),
+            'goal_library_installed':status['goal_library_installed'],'goals':status['goals'],'graph_templates':status['graph_templates'],
+            'credentials_or_authority_provided':False},
         'work_cycle':['tool_probe for operator-bound tools','preflight','acquire','read request/context and procedure','heartbeat while working','tool_execute (write-ahead plus native readback) or scoped host action_prepare/action_result','complete with structured receipt'],
         'executable_tool_dispatch':{'mcp_stdio_client':True,'public_source_reader':True,'registered_routes_required':True,'not_all_platform_sdks':True},
         'source_ingress':{'signed_observations':True,'stripe_original_body_signature':True,'automatic_source_provisioning':False},

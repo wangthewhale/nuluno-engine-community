@@ -8,6 +8,7 @@ import {timingSafeEqual} from 'node:crypto';
 import {McpServer,createMcpHandler} from '@modelcontextprotocol/server';
 import {toNodeHandler} from '@modelcontextprotocol/node';
 import {z} from 'zod';
+import {scopedHostContract,scopeMethodNames} from './contract-view.mjs';
 
 const MAX_BYTES=2*1024*1024;
 const READ_ONLY=new Set(['campaign_research','campaign_read','campaign_events','negotiate','status','read_public_source','delivery_report','execution_metrics','cost_summary','trust_status','learning_status','commercial_rank','catalog','goal_summary','graph','memory_search','preflight','contract','execution_catalog','goal_readiness','capability_inventory','capability_readiness','experience_search','artifact_contract','pursuit_status','evolution_status']);
@@ -51,14 +52,15 @@ export async function createEngineServer(options){
  const resource=new URL('/mcp',origin).href;
  const makeMcp=(binding,authorization)=>{
   const server=new McpServer({name:'nuluno-engine',version:metadata.version},{instructions:'Independent Nuluno Engine. Use only the tools exposed by this operator scope. When workflow tools are exposed, preserve the original run, lease and evidence. Public research and a saved report are not a completed sale. Resume or reconcile original uncertain writes. Platform grants, including independent Nuluno Access, remain separate.'});
-  for(const [name,schema]of Object.entries(metadata.methods)){
-   if(!binding.settings.methods?.includes(name)&&binding.settings.methods)continue;
+  for(const name of scopeMethodNames(metadata.methods,binding.settings)){
+   const schema=metadata.methods[name];
    server.registerTool(name,{description:READ_ONLY.has(name)?'Read scoped Engine '+name.replaceAll('_',' ')+'.':'Run scoped Engine '+name.replaceAll('_',' ')+'. Preserve original task, lease, evidence and authority.',inputSchema:toolSchema(schema),annotations:{readOnlyHint:READ_ONLY.has(name),destructiveHint:false,openWorldHint:['campaign_research','read_public_source','tool_probe','tool_execute','tool_reconcile','source_retry','capability_discover','artifact_dispatch','artifact_generate','evolution_tick'].includes(name)}},async arguments_=>{
     try{
      const current=await authenticate(options.config,authorization,options.env);
      if(current.worker!==binding.worker)throw new Error('unauthorized');
      const result=await pythonCall(options,['--workspace',options.workspace,'--config',options.config,'--worker',current.worker,'--method',name],arguments_);
-     return toolResult(result.error?result:result.result,!!result.error,current.settings);
+     const value=result.error?result:name==='contract'?scopedHostContract(result.result,current.settings,arguments_.run_id):result.result;
+     return toolResult(value,!!result.error,current.settings);
     }catch(error){return {content:[{type:'text',text:JSON.stringify({error:{kind:'gateway_error',message:error.message}})}],isError:true};}
    });
   }

@@ -14,6 +14,34 @@ from nuluno_engine_community.growth_loop.resources import bundle_root
 
 
 class PublicBoundaryTests(unittest.TestCase):
+    def test_packaged_gateway_includes_scoped_contract_helper_and_public_namespace(self):
+        gateway=bundle_root()/'deploy/mcp-gateway'
+        server=(gateway/'server.mjs').read_text()
+        self.assertTrue((gateway/'contract-view.mjs').is_file())
+        self.assertIn("from './contract-view.mjs'",server)
+        self.assertIn('nuluno_engine_community.growth_loop.gateway',server)
+        self.assertNotIn("'-m','growth_loop.gateway'",server)
+    def test_actual_starter_host_contract_needs_no_fake_channel_catalog_and_advertises_only_installed_skill_capabilities(self):
+        from nuluno_engine_community.growth_loop.onboarding import host_contract
+        from nuluno_engine_community.growth_loop.resources import reference
+        with mock.patch.dict(os.environ,{'NULUNO_METHOD_PACK_DIR':''}):
+            self.assertFalse(reference('channel-catalog.json').exists())
+            contract=host_contract()
+            self.assertEqual(contract['schema'],'growth-host-contract-v1')
+            self.assertEqual(contract['capabilities'],['web.read'])
+            self.assertEqual(contract['library_inventory']['installed_work_skill_ids'],['S01'])
+            self.assertFalse(contract['library_inventory']['channel_catalog_installed'])
+            self.assertFalse(contract['library_inventory']['active_data_pack_installed'])
+            self.assertEqual(contract['library_inventory']['installed_channel_skill_count'],0)
+            self.assertFalse(contract['library_inventory']['platform_execution_skills_included'])
+            self.assertFalse(contract['library_inventory']['credentials_or_authority_provided'])
+    def test_missing_catalog_of_a_declared_active_library_is_not_silently_treated_as_free_starter(self):
+        from nuluno_engine_community.growth_loop.onboarding import host_contract
+        from nuluno_engine_community.growth_loop.resources import library_status
+        with mock.patch.dict(os.environ,{'NULUNO_METHOD_PACK_DIR':''}):
+            active={**library_status(),'active_pack':{'id':'controlled-corrupt-active-pack'}}
+            with mock.patch('nuluno_engine_community.growth_loop.onboarding.library_status',return_value=active):
+                with self.assertRaisesRegex(ValueError,'installed_channel_catalog_missing'):host_contract()
     def test_starter_catalog_is_real_and_paginated_without_paid_catalog_stubs(self):
         from nuluno_engine_community.growth_loop.library_catalog import page
         with mock.patch.dict(os.environ,{'NULUNO_METHOD_PACK_DIR':''}):
