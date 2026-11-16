@@ -1,0 +1,275 @@
+{
+  "schema": "nuluno-campaign-public-projection-v1",
+  "id": "campaign-96ede6f0e3b99ffffd120ca0",
+  "run_id": "campaign-engine-public",
+  "product_url": "https://engine.nuluno.com/",
+  "created_at": 1794810840.54607,
+  "state": "ready_for_review",
+  "sources": [
+    {
+      "body_sha256": "dab14f239490af6df67726b00172f235d3daa9318db5e6610e2637506e815277",
+      "classification": "live_public_source",
+      "observed_at": 1794810683.937414,
+      "receipt_id": "83d379806ffba3674d4585a4c28e3cc68cae509283562d29a49147348d453382",
+      "requested_url": "https://engine.nuluno.com/?lang=en",
+      "text_sha256": "cb70da3b30b85b002b59b92aae58b0214f958862656b2ffec2e92506fed9722b",
+      "text_truncated": false,
+      "url": "https://engine.nuluno.com/?lang=en"
+    },
+    {
+      "body_sha256": "2dbf864d4b7fccab005a7753edc08c3c1cef6c9b1d5204f58c0f3745ec719996",
+      "classification": "live_public_source",
+      "observed_at": 1794810684.117926,
+      "receipt_id": "d150e40542a1bbf4bb600486d27dfa9924fe85434d17016717076410d2a6479b",
+      "requested_url": "https://engine.nuluno.com/api/catalog",
+      "text_sha256": "2dbf864d4b7fccab005a7753edc08c3c1cef6c9b1d5204f58c0f3745ec719996",
+      "text_truncated": false,
+      "url": "https://engine.nuluno.com/api/catalog"
+    }
+  ],
+  "unknowns": [
+    "demo"
+  ],
+  "angles": [
+    {
+      "audience": "Founders connecting an AI agent to sales research",
+      "causal_effect_proven": false,
+      "fact_binding_is_not_entailment_or_sales_proof": true,
+      "fact_ids": [
+        "fact-8245ac14b77fc1ee8a8f",
+        "fact-1953c6ca51086a462f93",
+        "fact-fa909635bdd8413aed7d",
+        "fact-06cc9b963606e3b41498"
+      ],
+      "hypothesis": "Showing saved task continuity may make the engine easier to evaluate than another blank agent chat",
+      "id": "continuity",
+      "motive": "Keep progress when a campaign task spans sessions",
+      "status": "unvalidated_hypothesis"
+    },
+    {
+      "audience": "Developers evaluating an agent growth workflow",
+      "causal_effect_proven": false,
+      "fact_binding_is_not_entailment_or_sales_proof": true,
+      "fact_ids": [
+        "fact-8245ac14b77fc1ee8a8f",
+        "fact-1953c6ca51086a462f93",
+        "fact-fa909635bdd8413aed7d",
+        "fact-73e471698dcc2f1bdda2"
+      ],
+      "hypothesis": "Lead with visible evidence boundaries and cost uncertainty rather than promises of automatic sales",
+      "id": "accountability",
+      "motive": "Know what happened and what still lacks evidence",
+      "status": "unvalidated_hypothesis"
+    }
+  ],
+  "experiment": {
+    "adoption_authorized": false,
+    "assignment_unit": "visitor",
+    "candidate_variant": "candidate",
+    "causal_lift": null,
+    "control_variant": "control",
+    "conversion_count": null,
+    "conversion_source": "owner_backend_verified",
+    "exposure_count": null,
+    "guardrails": [
+      "same_product_and_original_receipts",
+      "sticky_assignment_before_exposure",
+      "no_client_claimed_purchase",
+      "no_winner_before_sample_and_cost_verification",
+      "rollback_to_original_control"
+    ],
+    "measurement_adapter_connected": false,
+    "min_sample_per_arm": 100,
+    "preregistered_at": 1794810840.546064,
+    "primary_metric": "qualified_conversion",
+    "sample_plan_validated": false,
+    "state": "awaiting_native_evidence"
+  },
+  "artifact_digest": "930227f8dd3b854955b0f7ad43a57871f3b2e41d3295e03038c17391319ec229",
+  "candidate_origin": "caller_supplied_not_autonomous_model_learning",
+  "model_calls_by_engine": 0,
+  "external_writes": 0,
+  "full_cost": null,
+  "sales_lift_verified": false,
+  "facts": [
+    {
+      "category_status": "caller_selected_requires_review",
+      "id": "fact-8245ac14b77fc1ee8a8f",
+      "independently_verified": false,
+      "kind": "product",
+      "source": {
+        "body_sha256": "dab14f239490af6df67726b00172f235d3daa9318db5e6610e2637506e815277",
+        "fragment": {
+          "coordinate_system": "visible_text",
+          "end": 13,
+          "hash_encoding": "utf-8",
+          "start": 0,
+          "unit": "unicode_codepoints"
+        },
+        "receipt_id": "83d379806ffba3674d4585a4c28e3cc68cae509283562d29a49147348d453382",
+        "text_sha256": "cb70da3b30b85b002b59b92aae58b0214f958862656b2ffec2e92506fed9722b",
+        "url": "https://engine.nuluno.com/?lang=en"
+      },
+      "status": "publisher_observed",
+      "value": "Nuluno Engine"
+    },
+    {
+      "category_status": "caller_selected_requires_review",
+      "id": "fact-1953c6ca51086a462f93",
+      "independently_verified": false,
+      "kind": "feature",
+      "source": {
+        "body_sha256": "dab14f239490af6df67726b00172f235d3daa9318db5e6610e2637506e815277",
+        "fragment": {
+          "coordinate_system": "visible_text",
+          "end": 1525,
+          "hash_encoding": "utf-8",
+          "start": 1491,
+          "unit": "unicode_codepoints"
+        },
+        "receipt_id": "83d379806ffba3674d4585a4c28e3cc68cae509283562d29a49147348d453382",
+        "text_sha256": "cb70da3b30b85b002b59b92aae58b0214f958862656b2ffec2e92506fed9722b",
+        "url": "https://engine.nuluno.com/?lang=en"
+      },
+      "status": "publisher_observed",
+      "value": "Task state lives outside the model"
+    },
+    {
+      "category_status": "caller_selected_requires_review",
+      "id": "fact-fa909635bdd8413aed7d",
+      "independently_verified": false,
+      "kind": "price",
+      "source": {
+        "body_sha256": "dab14f239490af6df67726b00172f235d3daa9318db5e6610e2637506e815277",
+        "fragment": {
+          "coordinate_system": "visible_text",
+          "end": 2255,
+          "hash_encoding": "utf-8",
+          "start": 2230,
+          "unit": "unicode_codepoints"
+        },
+        "receipt_id": "83d379806ffba3674d4585a4c28e3cc68cae509283562d29a49147348d453382",
+        "text_sha256": "cb70da3b30b85b002b59b92aae58b0214f958862656b2ffec2e92506fed9722b",
+        "url": "https://engine.nuluno.com/?lang=en"
+      },
+      "status": "publisher_observed",
+      "value": "US$99 · one-time purchase"
+    },
+    {
+      "category_status": "caller_selected_requires_review",
+      "id": "fact-06cc9b963606e3b41498",
+      "independently_verified": false,
+      "kind": "delivery",
+      "source": {
+        "body_sha256": "dab14f239490af6df67726b00172f235d3daa9318db5e6610e2637506e815277",
+        "fragment": {
+          "coordinate_system": "visible_text",
+          "end": 2075,
+          "hash_encoding": "utf-8",
+          "start": 2033,
+          "unit": "unicode_codepoints"
+        },
+        "receipt_id": "83d379806ffba3674d4585a4c28e3cc68cae509283562d29a49147348d453382",
+        "text_sha256": "cb70da3b30b85b002b59b92aae58b0214f958862656b2ffec2e92506fed9722b",
+        "url": "https://engine.nuluno.com/?lang=en"
+      },
+      "status": "publisher_observed",
+      "value": "Nuluno Engine 0.12.0 installation package."
+    },
+    {
+      "category_status": "caller_selected_requires_review",
+      "id": "fact-73e471698dcc2f1bdda2",
+      "independently_verified": false,
+      "kind": "limitation",
+      "source": {
+        "body_sha256": "dab14f239490af6df67726b00172f235d3daa9318db5e6610e2637506e815277",
+        "fragment": {
+          "coordinate_system": "visible_text",
+          "end": 2000,
+          "hash_encoding": "utf-8",
+          "start": 1968,
+          "unit": "unicode_codepoints"
+        },
+        "receipt_id": "83d379806ffba3674d4585a4c28e3cc68cae509283562d29a49147348d453382",
+        "text_sha256": "cb70da3b30b85b002b59b92aae58b0214f958862656b2ffec2e92506fed9722b",
+        "url": "https://engine.nuluno.com/?lang=en"
+      },
+      "status": "publisher_observed",
+      "value": "Missing cost data stays unknown."
+    }
+  ],
+  "variants": [
+    {
+      "ad": {
+        "cta": "Review the Engine package",
+        "destination_url": "https://engine.nuluno.com/",
+        "headline": "A campaign should have a next step after the chat",
+        "published": false
+      },
+      "angle_id": "continuity",
+      "id": "control",
+      "landing": {
+        "cta": {
+          "label": "Review the Engine package",
+          "url": "https://engine.nuluno.com/"
+        },
+        "headline": "Keep the next sales task connected to the last result",
+        "sections": [
+          {
+            "fact_id": "fact-8245ac14b77fc1ee8a8f"
+          },
+          {
+            "fact_id": "fact-1953c6ca51086a462f93"
+          },
+          {
+            "fact_id": "fact-fa909635bdd8413aed7d"
+          },
+          {
+            "fact_id": "fact-06cc9b963606e3b41498"
+          }
+        ],
+        "subheadline": "Review a persistent engine for product research, campaign work and a clearer next step."
+      },
+      "status": "unvalidated_messaging_hypothesis"
+    },
+    {
+      "ad": {
+        "cta": "Check the product and installation details",
+        "destination_url": "https://engine.nuluno.com/",
+        "headline": "Build a workflow you can inspect before you rely on it",
+        "published": false
+      },
+      "angle_id": "accountability",
+      "id": "candidate",
+      "landing": {
+        "cta": {
+          "label": "Check the product and installation details",
+          "url": "https://engine.nuluno.com/"
+        },
+        "headline": "See the work, the evidence and the unanswered questions",
+        "sections": [
+          {
+            "fact_id": "fact-8245ac14b77fc1ee8a8f"
+          },
+          {
+            "fact_id": "fact-1953c6ca51086a462f93"
+          },
+          {
+            "fact_id": "fact-fa909635bdd8413aed7d"
+          },
+          {
+            "fact_id": "fact-73e471698dcc2f1bdda2"
+          }
+        ],
+        "subheadline": "Evaluate an engine that keeps task state while leaving missing cost information visible."
+      },
+      "status": "unvalidated_messaging_hypothesis"
+    }
+  ],
+  "publication_notice": "Engine-generated experimental draft; no published advertising campaign or sales improvement is claimed.",
+  "quoted_words_by_url": {
+    "https://engine.nuluno.com/?lang=en": 22,
+    "https://engine.nuluno.com/api/catalog": 0
+  },
+  "projection_digest": "8e9d824e8036cd3501943813162e6ecefca0cd0dfeb459ddfab63d1f5d352f1e"
+}

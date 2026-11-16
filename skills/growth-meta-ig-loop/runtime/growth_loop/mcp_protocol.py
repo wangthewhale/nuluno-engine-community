@@ -52,7 +52,7 @@ class MCPServer:
                 elif method=='ping':value={}
                 elif method=='tools/list':
                     if params.get('cursor') is not None:raise ProtocolError('Unknown tools cursor')
-                    readonly={'negotiate','status','read_public_source','delivery_report','execution_metrics','cost_summary','trust_status','learning_status','commercial_rank','catalog','goal_summary','graph','memory_search','preflight','contract','execution_catalog','goal_readiness','capability_inventory','capability_readiness','experience_search','artifact_contract'}
+                    readonly={'campaign_research','campaign_read','campaign_events','negotiate','status','read_public_source','delivery_report','execution_metrics','cost_summary','trust_status','learning_status','commercial_rank','catalog','goal_summary','graph','memory_search','preflight','contract','execution_catalog','goal_readiness','capability_inventory','capability_readiness','experience_search','artifact_contract'}
                     value={'tools':[{'name':name,'description':tool_description(name),'inputSchema':self.schema(name),'annotations':{'readOnlyHint':name in readonly,'destructiveHint':False,'openWorldHint':False}} for name in sorted(self.methods)]}
                 elif method=='tools/call':
                     name=params.get('name')
@@ -76,7 +76,11 @@ class MCPServer:
 
 
 def tool_description(name):
-    descriptions={'contract':'Get model-neutral schemas, host requirements and work-cycle instructions.',
+    descriptions={'campaign_research':'Read only operator-scoped public product sources, select exact source-aware quotations, and preserve original receipts. No model calls or platform writes.',
+        'campaign_build':'Validate caller-supplied audience hypotheses against original run facts and save escaped landing/ad drafts. Local artifacts only; no deployment, ad publishing, or sales proof.',
+        'campaign_read':'Read a saved source-bound campaign artifact with original facts, hypotheses, HTML drafts and unknown costs.',
+        'campaign_events':'Read persisted campaign activity using a cursor. Does not reveal model private reasoning.',
+        'contract':'Get model-neutral schemas, host requirements and work-cycle instructions.',
         'preflight':'Read-only diagnosis of missing tools, stale identity proof, account access and execution scope.',
         'acquire':'Lease one task matching this trusted worker; returns procedure and brand context. Does not grant platform permission.',
         'complete':'Validate a leased task receipt and advance its existing dependencies.',

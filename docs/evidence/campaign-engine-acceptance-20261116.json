@@ -1,0 +1,55 @@
+{
+  "schema": "nuluno-campaign-actual-acceptance-v1",
+  "observed_at": "2026-11-16T06:34:01.675Z",
+  "product": "https://engine.nuluno.com/",
+  "run_id": "campaign-engine-public",
+  "artifact_id": "campaign-96ede6f0e3b99ffffd120ca0",
+  "artifact_digest": "930227f8dd3b854955b0f7ad43a57871f3b2e41d3295e03038c17391319ec229",
+  "source_candidate_sha256": "ece91927415e2e5b004ee33c187d0e189377108944c3ccaefd185564f1b02839",
+  "released_version": false,
+  "actual_transport": "official_MCP_Streamable_HTTP",
+  "source_receipts": [
+    {
+      "body_sha256": "dab14f239490af6df67726b00172f235d3daa9318db5e6610e2637506e815277",
+      "classification": "live_public_source",
+      "observed_at": 1794810683.937414,
+      "receipt_id": "83d379806ffba3674d4585a4c28e3cc68cae509283562d29a49147348d453382",
+      "requested_url": "https://engine.nuluno.com/?lang=en",
+      "text_sha256": "cb70da3b30b85b002b59b92aae58b0214f958862656b2ffec2e92506fed9722b",
+      "text_truncated": false,
+      "url": "https://engine.nuluno.com/?lang=en"
+    },
+    {
+      "body_sha256": "2dbf864d4b7fccab005a7753edc08c3c1cef6c9b1d5204f58c0f3745ec719996",
+      "classification": "live_public_source",
+      "observed_at": 1794810684.117926,
+      "receipt_id": "d150e40542a1bbf4bb600486d27dfa9924fe85434d17016717076410d2a6479b",
+      "requested_url": "https://engine.nuluno.com/api/catalog",
+      "text_sha256": "2dbf864d4b7fccab005a7753edc08c3c1cef6c9b1d5204f58c0f3745ec719996",
+      "text_truncated": false,
+      "url": "https://engine.nuluno.com/api/catalog"
+    }
+  ],
+  "variants": [
+    {
+      "id": "control",
+      "angle_id": "continuity",
+      "html_sha256": "ed30b43eb2d209267f16442a06b13fcd9f27154e0a5bf1cbf8e852dd49df522c"
+    },
+    {
+      "id": "candidate",
+      "angle_id": "accountability",
+      "html_sha256": "7c37f04dfeca9e1b2ec1ec15838979a8474ea680d7371b5e2e4956dd828baa0b"
+    }
+  ],
+  "restart_original_research_reused": true,
+  "restart_original_campaign_reused": true,
+  "native_denial_status": 401,
+  "source_read_count": "2",
+  "engine_model_calls": 0,
+  "caller_candidate": "Codex authored after inspecting original public quotations",
+  "external_writes": 0,
+  "sales_lift_verified": false,
+  "full_cost": null,
+  "measurement_adapter_connected": false
+}

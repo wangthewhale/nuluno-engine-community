@@ -69,7 +69,7 @@ def delivery_report(store, run_id, settings=None):
     economics=Economics(store,settings).summary(run_id)
     profile = store.config(run_id)
     artifacts = [{'kind': r['kind'], 'cycle': r['cycle'], 'data': json.loads(r['data'])}
-        for r in store.db.execute("SELECT kind,cycle,data FROM artifacts WHERE run_id=? AND (kind LIKE 'flow_output.%' OR kind LIKE 'public_source.%' OR kind LIKE 'tool.execution.%') ORDER BY created,rowid", (run_id,))]
+        for r in store.db.execute("SELECT kind,cycle,data FROM artifacts WHERE run_id=? AND (kind LIKE 'flow_output.%' OR kind LIKE 'public_source.%' OR kind LIKE 'tool.execution.%' OR kind LIKE 'campaign.%') ORDER BY created,rowid", (run_id,))]
     operations = [{'state': r['state'], 'count': r['n']} for r in store.db.execute("SELECT state,count(*) n FROM operations WHERE task_key IN (SELECT key FROM tasks WHERE run_id=?) GROUP BY state", (run_id,))]
     return redact({'run_id': run_id, 'brand_url': profile['brand']['url'], 'status': store.status(run_id),
         'deliverables_and_read_receipts': artifacts, 'saved_reviews': Learning(store).search(run_id),

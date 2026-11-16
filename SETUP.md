@@ -1,4 +1,53 @@
-# Run the real public first task
+# Run a real product task
+
+Two entry points are available. The immutable alpha.2 release below runs the
+proven public read/reuse/restart/revoke task. The **new source-only campaign
+workbench** additionally produces source-bound facts, two audience hypotheses,
+ad drafts and actual landing HTML. It is not in the old alpha.2 assets; first
+confirm the owner's reviewed checkout contains `examples/campaign/README.md`.
+Never silently update an existing installation or replace its state.
+
+For a first owner-authorized campaign trial from source, with Node 24/npm and
+Python 3.9+, run one command in that reviewed checkout:
+
+```sh
+node scripts/try-campaign.mjs --url https://www.sqlite.org/index.html --out my-campaign
+```
+
+Open `my-campaign/starter/landing-control.html` and `landing-candidate.html`.
+The bootstrap installs dependencies in an isolated private temporary consumer;
+it preserves the original run/key/receipts under `my-campaign/private/` with
+private permissions. Never publish that directory. Without a caller model,
+the two copy frames are **starter templates, not inferred audiences or learned
+methods**. Read `starter/research.json`, propose a fact-bound candidate, then
+use `--candidate ./reviewed.json --revision reviewed` on the same URL/output.
+Repeating an existing revision must preserve its payload. It cannot silently
+replace an older candidate. A recorded proof is not a new result.
+
+Rerun the original command to verify original artifact reuse. For this trial's
+revocation check, add `--revoke` to the same command, then run once more without
+it. Require native 401 denial and exit 3. Do not replace that key or output to
+turn a denied trial into a success.
+
+For the campaign task, read [the campaign procedure](examples/campaign/README.md).
+Use an owner-configured gateway and existing run, its exact HTTPS source
+allowlist and read quota. Call `campaign_research`; show missing facts; then
+ask the connected model or owner to propose the candidate. Validate it with
+`campaign_build`, read the original `campaign_read` artifact, and show both
+actual HTML drafts and cursor-readable `campaign_events`. Do not submit a new
+price, guarantee or quantified claim merely because it has a source ID. The
+entire risky claim must be an original quoted statement; other messaging stays
+an unvalidated hypothesis.
+
+Preserve original request IDs for retries. Changed selection/copy is an
+explicit new local candidate, not a second platform action. Previously
+delivered owner files can be reviewed after revocation; do not revive a revoked
+worker. Do not claim a sale, uplift or autonomous method learning from generated
+pages, clicks or an experiment proposal. Full costs stay unknown until verified.
+Deploying pages, collecting visitor events or publishing ads needs separate
+host/platform scope. This setup instruction does not grant it.
+
+## Released alpha.2 public first task
 
 This procedure is for an owner-authorized agent in a clean copy of this
 repository. It does not authorize a different host, account or private service.

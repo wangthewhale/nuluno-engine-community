@@ -18,10 +18,10 @@ jobs:
         working-directory: /tmp
         run: nuluno-engine-community doctor
       - name: Core bounded learning and public pack rejection checks
-        run: python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests tests.test_sdk_identity -v
+        run: python -m unittest tests.test_artifact_evolution tests.test_method_packs.PublicBoundaryTests tests.test_sdk_identity tests.test_campaign -v
       - run: npm --prefix deploy/mcp-gateway ci --ignore-scripts --no-audit --no-fund
       - name: Standard MCP, scope, state and compatibility
-        run: node --test deploy/mcp-gateway/gateway.test.mjs deploy/mcp-gateway/compatibility.test.mjs
+        run: node --test deploy/mcp-gateway/gateway.test.mjs deploy/mcp-gateway/compatibility.test.mjs tests/first-campaign-paths.test.mjs
       - name: Build independent container
         run: docker build -f deploy/Dockerfile.mcp -t nuluno-engine-community:ci .
       - name: Actually boot container and preserve original state across replacement

@@ -38,7 +38,7 @@ def safe_path(name):
     if any(p in FORBIDDEN_PARTS or p.endswith('.egg-info') for p in parts):raise ValueError('private_or_generated_source_path')
     if Path(name).name in FORBIDDEN_FILES or Path(name).name.startswith('.env') or '.sqlite' in name or name.endswith(('.log','.zip','.whl')):raise ValueError('restricted_source_file')
     if parts[0] not in ALLOWED_DIRS and name not in ALLOWED_TOP:raise ValueError('unreviewed_source_root')
-    if parts[0]=='examples' and not (len(parts)>=3 and parts[1]=='method-learning' or name in ('examples/source-brief/README.md','examples/source-brief/brief.mjs')):raise ValueError('unreviewed_example_folder')
+    if parts[0]=='examples' and not (len(parts)>=3 and parts[1]=='method-learning' or name in ('examples/source-brief/README.md','examples/source-brief/brief.mjs','examples/campaign/README.md','examples/campaign/campaign.mjs','examples/campaign/first-campaign.mjs')):raise ValueError('unreviewed_example_folder')
     if parts[0]=='skills' and (len(parts)<2 or parts[1] not in {'growth-meta-ig-loop','growth-read-existing-offer'}):raise ValueError('commercial_skill_folder_forbidden')
     if '/references/graphs/' in name:raise ValueError('commercial_graph_library_forbidden')
     return name

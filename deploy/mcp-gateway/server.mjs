@@ -10,7 +10,7 @@ import {toNodeHandler} from '@modelcontextprotocol/node';
 import {z} from 'zod';
 
 const MAX_BYTES=2*1024*1024;
-const READ_ONLY=new Set(['negotiate','status','read_public_source','delivery_report','execution_metrics','cost_summary','trust_status','learning_status','commercial_rank','catalog','goal_summary','graph','memory_search','preflight','contract','execution_catalog','goal_readiness','capability_inventory','capability_readiness','experience_search','artifact_contract','pursuit_status','evolution_status']);
+const READ_ONLY=new Set(['campaign_research','campaign_read','campaign_events','negotiate','status','read_public_source','delivery_report','execution_metrics','cost_summary','trust_status','learning_status','commercial_rank','catalog','goal_summary','graph','memory_search','preflight','contract','execution_catalog','goal_readiness','capability_inventory','capability_readiness','experience_search','artifact_contract','pursuit_status','evolution_status']);
 function same(a,b){const x=Buffer.from(a),y=Buffer.from(b);return x.length===y.length&&timingSafeEqual(x,y);}
 function json(res,status,value){const body=JSON.stringify(value);res.writeHead(status,{'content-type':'application/json','cache-control':'no-store','content-length':Buffer.byteLength(body)});res.end(body);}
 function safeOrigin(origin){const u=new URL(origin);if(u.username||u.password||u.search||u.hash||u.pathname!=='/'||!['https:','http:'].includes(u.protocol))throw new Error('Set ENGINE_ORIGIN to a plain HTTPS origin');if(u.protocol==='http:'&&!['127.0.0.1','localhost','[::1]'].includes(u.hostname))throw new Error('Non-loopback origin requires HTTPS');return u;}
@@ -53,7 +53,7 @@ export async function createEngineServer(options){
   const server=new McpServer({name:'nuluno-engine',version:metadata.version},{instructions:'Independent Nuluno Engine. Use only the tools exposed by this operator scope. When workflow tools are exposed, preserve the original run, lease and evidence. Public research and a saved report are not a completed sale. Resume or reconcile original uncertain writes. Platform grants, including independent Nuluno Access, remain separate.'});
   for(const [name,schema]of Object.entries(metadata.methods)){
    if(!binding.settings.methods?.includes(name)&&binding.settings.methods)continue;
-   server.registerTool(name,{description:READ_ONLY.has(name)?'Read scoped Engine '+name.replaceAll('_',' ')+'.':'Run scoped Engine '+name.replaceAll('_',' ')+'. Preserve original task, lease, evidence and authority.',inputSchema:toolSchema(schema),annotations:{readOnlyHint:READ_ONLY.has(name),destructiveHint:false,openWorldHint:['read_public_source','tool_probe','tool_execute','tool_reconcile','source_retry','capability_discover','artifact_dispatch','artifact_generate','evolution_tick'].includes(name)}},async arguments_=>{
+   server.registerTool(name,{description:READ_ONLY.has(name)?'Read scoped Engine '+name.replaceAll('_',' ')+'.':'Run scoped Engine '+name.replaceAll('_',' ')+'. Preserve original task, lease, evidence and authority.',inputSchema:toolSchema(schema),annotations:{readOnlyHint:READ_ONLY.has(name),destructiveHint:false,openWorldHint:['campaign_research','read_public_source','tool_probe','tool_execute','tool_reconcile','source_retry','capability_discover','artifact_dispatch','artifact_generate','evolution_tick'].includes(name)}},async arguments_=>{
     try{
      const current=await authenticate(options.config,authorization,options.env);
      if(current.worker!==binding.worker)throw new Error('unauthorized');

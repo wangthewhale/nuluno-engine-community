@@ -1,9 +1,48 @@
 # Nuluno Engine Community
 
-**Keep sales work moving across agent runs.**
+**Sales experiments your AI agent can actually run.**
+
+Product URL → source-checked facts → ad and landing drafts → saved receipts for
+the next experiment.
 
 A self-hosted sales and growth engine for persistent goals, evidence-backed
 workflows and checked method updates, usable through MCP.
+
+**New source workbench:** two messaging angles, ad drafts and actual landing
+HTML, with exact sources behind the facts. It creates reviewable drafts and an
+experiment specification; it does not publish ads or establish a sales winner.
+Missing prices, complete costs and growth effects remain unknown. This source
+addition is **not in the immutable alpha.2 release assets**.
+
+[Explore the Engine-generated lab preview](https://engine.nuluno.com/lab?lang=en) ·
+[Run the campaign workbench](examples/campaign/README.md) ·
+[Inspect a real Engine campaign](docs/evidence/campaign-engine-20261116.json) ·
+[Open/download its control HTML](docs/examples/campaign-engine-control.html) ·
+[Open/download its alternative HTML](docs/examples/campaign-engine-candidate.html)
+
+The hosted lab presents actual recorded Engine artifacts; hosted live
+generation is not connected. Run the source below to generate for your own URL.
+
+From a new checkout containing this source addition, with **Node 24, npm and
+Python 3.9+** installed:
+
+```sh
+git clone https://github.com/wangthewhale/nuluno-engine-community.git
+cd nuluno-engine-community
+node scripts/try-campaign.mjs --url https://www.sqlite.org/index.html --out my-campaign
+```
+
+Replace the URL with your own public product page when ready. Open
+`my-campaign/starter/landing-control.html` and `landing-candidate.html`.
+No model key or social login is required. Without `--candidate`, both messaging
+frames are explicitly labeled starter templates: no audience inference or AI
+learning has occurred. An external agent can inspect the saved research, write
+its own candidate and pass `--candidate ./reviewed.json --revision reviewed`.
+Same source/run/quota, new explicit local draft; no extra source GET.
+
+[Recorded source-only campaign trial](docs/evidence/campaign-one-command-20261116.json):
+real public read, same artifact after a fresh process, original-key revocation,
+then native denial with exit 3. This local operator check is not a sales result.
 
 **Free core:** S01 product research. **Separate paid library:** 99 goals ·
 134 graphs · 188 folders.
@@ -37,6 +76,32 @@ The free Apache-2.0 core includes the S01 public-product-research starter,
 persistent work, MCP and bounded method checks. Bring your own model/host and
 actual platform authority for broader tasks. The separately licensed sales
 library is not required for this public trial.
+
+## From a URL to something you can review
+
+| Deliverable | What the campaign workbench actually does |
+|---|---|
+| Product facts | Scans the whole bounded source text, not only its opening excerpt; preserves exact quoted fragments and both raw-body and visible-text hashes |
+| Audience angles | Accepts a human/model candidate with original fact references; labels motives and creative messages as unvalidated hypotheses |
+| Ads and landing pages | Produces two ad drafts, escaped HTML pages and a sales brief; no platform login, publishing or ad spend |
+| Next experiment | Saves a control/candidate specification; waits for verified native exposure, qualified conversion and cost evidence |
+| Continuity | Reuses original read and campaign artifacts after a restart; revoked access still fails |
+
+The [recorded own-product example](docs/evidence/campaign-engine-20261116.json)
+uses real reads of the Engine page and machine catalog, two caller-authored
+angles, and generated HTML you can download and open locally. The
+[MCP acceptance receipt](docs/evidence/campaign-engine-acceptance-20261116.json)
+records native readback and restart checks; the original worker was then revoked
+and received 401. Engine made no model calls or platform writes. The caller in this
+example was Codex; the engine did not autonomously invent or learn the method.
+There are no measured conversions or adopted winners in this example.
+
+Before this addition, the first task delivered a bounded source brief. The
+workbench adds usable campaign artifacts without replacing the reliable
+read/retry/restart/revocation path. Install from the reviewed source containing
+`examples/campaign/`; do not expect those files in an older release archive.
+The [MCP procedure](examples/campaign/README.md) lists the four scoped tools and
+the exact candidate format. A running operator gateway is required.
 
 ## First run: make something you can use
 

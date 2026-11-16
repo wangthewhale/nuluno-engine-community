@@ -23,7 +23,7 @@ from .mcp_protocol import MCP_VERSIONS
 from .portability import local_path
 
 PROTOCOL = 'growth-worker-v1'
-METHODS = ['negotiate', 'status', 'read_public_source', 'delivery_report', 'execution_metrics', 'cost_summary', 'economic_receipt_ingest', 'interaction_receipt_ingest', 'trust_status', 'learning_status', 'commercial_next_experiment', 'commercial_adopt', 'commercial_monitor', 'commercial_transfer_register', 'commercial_transfer_compare', 'acquire', 'heartbeat', 'complete', 'action_prepare', 'action_result',
+METHODS = ['campaign_research', 'campaign_build', 'campaign_read', 'campaign_events', 'negotiate', 'status', 'read_public_source', 'delivery_report', 'execution_metrics', 'cost_summary', 'economic_receipt_ingest', 'interaction_receipt_ingest', 'trust_status', 'learning_status', 'commercial_next_experiment', 'commercial_adopt', 'commercial_monitor', 'commercial_transfer_register', 'commercial_transfer_compare', 'acquire', 'heartbeat', 'complete', 'action_prepare', 'action_result',
            'preflight', 'contract', 'run_create', 'execution_catalog', 'goal_readiness', 'tool_probe', 'tool_execute', 'tool_reconcile', 'source_ingest', 'source_retry', 'event_ingest', 'memory_search', 'memory_add', 'method_propose', 'experiment_register',
            'experiment_compare', 'method_monitor', 'method_adopt', 'method_rollback', 'graph', 'repair', 'stop', 'channel_recover', 'goal_summary', 'catalog',
            'capability_inventory', 'capability_discover', 'capability_readiness', 'plan_compose', 'plan_apply',
@@ -114,6 +114,13 @@ class Service:
             from .onboarding import host_contract
             return host_contract()
         profile = self.store.config(run_id)
+        if method.startswith('campaign_'):
+            from .campaign import Campaign
+            campaign = Campaign(self.store, self.config)
+            if method == 'campaign_research': return campaign.research(run_id, params['request_id'], params['urls'], params.get('receipt_ids'), params.get('fragments'))
+            if method == 'campaign_build': return campaign.build(run_id, params['request_id'], params['source_request_id'], params['body'])
+            if method == 'campaign_read': return campaign.read(run_id, params['artifact_id'])
+            if method == 'campaign_events': return campaign.events(run_id, params.get('after', 0), params.get('limit', 50))
         if method in ('execution_metrics','interaction_receipt_ingest'):
             from .observability import ExecutionMetrics
             metrics=ExecutionMetrics(self.store,self.config)
@@ -501,7 +508,7 @@ def mcp_stdio(workspace, config, worker):
 
 
 def input_schema(method):
-    fields = {'compact':'boolean','request_id':'string','url': 'string', 'task_key': 'string', 'lease': 'string', 'request_sha256': 'string', 'receipt': 'object',
+    fields = {'fragments':'array','receipt_ids':'array','urls':'array','source_request_id':'string','compact':'boolean','request_id':'string','url': 'string', 'task_key': 'string', 'lease': 'string', 'request_sha256': 'string', 'receipt': 'object',
               'action': 'object', 'operation_key': 'string', 'result': 'object', 'event': 'object',
               'headers': 'object', 'source': 'string', 'kind': 'string', 'body': 'object',
               'experiment_id': 'string', 'observations': 'object', 'reason': 'string',
@@ -509,6 +516,7 @@ def input_schema(method):
               'route_id':'string','arguments':'object','goal_id':'string','raw_body':'string',
               'proposal':'object','plan_id':'string','skill_id':'string','episode_ids':'array','instruction':'string','procedure_id':'string','defer_seed':'boolean','program':'array','method_id':'string','artifact_id':'string','suite_id':'string','receipt_id':'string','grant_id':'string','trial_id':'string'}
     required = {
+      'campaign_research':['request_id','urls'], 'campaign_build':['request_id','source_request_id','body'], 'campaign_read':['artifact_id'],
       'economic_receipt_ingest':['receipt_id'],'interaction_receipt_ingest':['receipt_id'],
       'commercial_next_experiment':['body'],'commercial_adopt':['experiment_id'],'commercial_monitor':['experiment_id','observations'],
       'commercial_transfer_register':['body'],'commercial_transfer_compare':['trial_id','observations'],
@@ -538,7 +546,7 @@ def input_schema(method):
       'method_propose': ['body'], 'experiment_register': ['body'],
       'experiment_compare': ['experiment_id','observations'], 'method_monitor':['experiment_id','observations'], 'method_adopt': ['experiment_id'],
       'channel_recover':['task_key','code','evidence'], 'method_rollback': ['reason'], 'repair': ['task_key','reason'], 'stop': ['reason']}.get(method, [])
-    optional = {'catalog':['kind','skill_id','after','limit'],'read_public_source':['compact','request_id'],'run_create':['proposal','defer_seed'], 'plan_compose':['proposal'], 'experience_search':['skill_id','after','limit'], 'procedure_derive':['instruction','program'],
+    optional = {'campaign_research':['receipt_ids','fragments'],'campaign_events':['after','limit'],'catalog':['kind','skill_id','after','limit'],'read_public_source':['compact','request_id'],'run_create':['proposal','defer_seed'], 'plan_compose':['proposal'], 'experience_search':['skill_id','after','limit'], 'procedure_derive':['instruction','program'],
                 'preflight':['inventory'], 'goal_readiness':['goal_id'], 'tool_execute':['arguments','action'], 'tool_reconcile':['task_key','lease','request_sha256'], 'source_retry':['source'], 'memory_search': ['kind','after','limit'], 'graph': ['cycle'], 'channel_recover':['retry_at']}.get(method, [])
     return {'$schema':'https://json-schema.org/draft/2020-12/schema', 'type': 'object', 'properties': {'run_id': {'type': 'string'}, **{f: {'type': fields[f]} for f in required + optional}},
             'required': ['run_id'] + required, 'additionalProperties': False}
