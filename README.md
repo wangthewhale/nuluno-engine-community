@@ -8,13 +8,17 @@ workflows and checked method updates, usable through MCP.
 **Free core:** S01 product research. **Separate paid library:** 99 goals ·
 134 graphs · 188 folders.
 
+[Compare the free core and paid full library](https://engine.nuluno.com/?lang=en).
+The free core and this public trial do not require a paid library.
+
 Make a real public-source brief. Restart the process. Recover the original run
 and receipt. Revoke that worker and confirm that the same key stays denied.
 
 [One-command trial (Node 24)](docs/one-command-trial.md) ·
 [Try the real task](#first-run-make-something-you-can-use) ·
 [Let your agent set it up](SETUP.md) ·
-[Inspect the actual proof](docs/evidence/first-use-anonymous-alpha2-20261115.json)
+[Inspect the 2026-11-15 proof](docs/evidence/first-use-anonymous-alpha2-20261115.json) ·
+[Anonymous run of published source (2026-11-16)](docs/evidence/one-command-published-20261116.json)
 
 ![Recorded Engine read, restart, original-receipt reuse and revoked-key denial](docs/images/first-use-proof.svg)
 
