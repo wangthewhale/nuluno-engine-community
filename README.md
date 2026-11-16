@@ -11,6 +11,7 @@ workflows and checked method updates, usable through MCP.
 Make a real public-source brief. Restart the process. Recover the original run
 and receipt. Revoke that worker and confirm that the same key stays denied.
 
+[One-command trial (Node 24)](docs/one-command-trial.md) ·
 [Try the real task](#first-run-make-something-you-can-use) ·
 [Let your agent set it up](SETUP.md) ·
 [Inspect the actual proof](docs/evidence/first-use-anonymous-alpha2-20261115.json)

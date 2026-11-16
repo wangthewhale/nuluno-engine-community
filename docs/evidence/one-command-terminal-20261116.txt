@@ -1,0 +1,7 @@
+[1/5] Install this reviewed source in a separate private temporary consumer.
+[2/5] Make one real public task.
+[3/5] Start a new process and reuse the original task/receipt.
+[4/5] Revoke the original key.
+[5/5] Start another process and require native revoked-key denial.
+PASS: real artifact, original-task reuse and native revoked-key denial.
+Open brief.md in your selected output folder.
