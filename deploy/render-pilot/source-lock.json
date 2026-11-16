@@ -2,12 +2,10 @@
   "schema": "nuluno-cloud-pilot-source-lock-v1",
   "observed_at": "2026-11-16T07:58:25.300744+00:00",
   "engine_repository": "https://github.com/wangthewhale/nuluno-engine-community",
-  "engine_source_commit": "c54f19d8fa833988e1fba3b5ae265fcc5acbcd16",
-  "source_archive_url": "https://codeload.github.com/wangthewhale/nuluno-engine-community/tar.gz/c54f19d8fa833988e1fba3b5ae265fcc5acbcd16",
-  "source_archive_sha256": "1150a1719a2cd46e7f60288f3fe78a24cb83d59ee1622c7f9ae93e7ceca75f72",
-  "source_archive_bytes": 392493,
-  "baseline_public_ci": "https://github.com/wangthewhale/nuluno-engine-community/actions/runs/43822829139",
-  "baseline_ci_reported_success_by_parent": true,
+  "engine_source_commit": "63cf40a044ad47739b84eceaf6fb2e298694ffe3",
+  "source_archive_url": "https://codeload.github.com/wangthewhale/nuluno-engine-community/tar.gz/63cf40a044ad47739b84eceaf6fb2e298694ffe3",
+  "source_archive_sha256": "ff3b3da5355f4216c83da5a3acbb28cef347dd8883e505703ff48288f929c941",
+  "source_archive_bytes": 425767,
   "baseline_is_not_new_pilot_image_acceptance": true,
   "image_locks": [
     {
@@ -29,6 +27,7 @@
       ]
     }
   ],
-  "pricing_source": "https://render.com/pricing",
-  "pricing_html_sha256": "bc7dd19706197489e608dc05068bfd32f0f64759f158a5743ea2c97a013d235c"
+  "newDockerImageBuilt": false,
+  "newCloudDeploymentCreated": false,
+  "baseline_public_ci": "https://github.com/wangthewhale/nuluno-engine-community/actions/runs/43864301161"
 }

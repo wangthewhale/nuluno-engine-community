@@ -21,7 +21,7 @@ const product='https://engine.nuluno.com/',source='https://engine.nuluno.com/?la
 const canonicalHost='pilot.ci.invalid',canonicalOrigin='https://'+canonicalHost;
 const runtimeEnv={...process.env,ENGINE_PILOT_BEARER:token};
 const report={schema:'nuluno-render-pilot-linux-acceptance-v1',status:'running',observedAt:new Date().toISOString(),
- deployment_source_commit:process.env.GITHUB_SHA??null,engine_source_commit:'c54f19d8fa833988e1fba3b5ae265fcc5acbcd16',
+ deployment_source_commit:process.env.GITHUB_SHA??null,engine_source_commit:'63cf40a044ad47739b84eceaf6fb2e298694ffe3',
  disposable_config:true,single_owner:true,single_product:true,multi_tenant:false,model_worker:false,
  render_service_created:false,render_tls_tested:false,new_subscription:false,external_platform_writes:0,model_calls:0,
  full_cost:null,source_url:source,source_gets:null,quota_limit:12,container_memory_limit_mb:512,container_cpu_limit:0.5,steps:[]};
@@ -74,7 +74,7 @@ function mcp(name,args,expectError=false){
  else{
  if(result.isError)throw Error('actual_mcp_tool_rejected');
  const data=result.structuredContent??JSON.parse(result.content.find(p=>p.type==='text').text);
- process.stdout.write(JSON.stringify({data,tool_names:tools.map(t=>t.name),official_client:true}));
+ process.stdout.write(JSON.stringify({data,tool_names:tools.map(t=>t.name),official_client:true,result_bytes:Buffer.byteLength(JSON.stringify(result))}));
  }
  }finally{await client.close();}`;
  return JSON.parse(runIn('node',['--input-type=module','-'],{stdin:program}));
@@ -91,6 +91,8 @@ try{
  assert.equal((await canonicalHttpFetch(local+'/healthz',{headers:{Host:canonicalHost,Origin:'https://outside.ci.invalid'}})).status,403);
  assert.equal(mcp('status',{run_id:'outside-authorized-run'},true).rejected,true);
  mark(stage,{actual_linux_image_boot:true,pid1_uid:10001,state_volume:true,strict_host_and_origin:true,outside_run_denied:true});
+ stage='actual_scoped_contract';
+ const discovered=mcp('contract',{run_id:'pilot-product'}),contract=discovered.data;assert.equal(contract.schema,'growth-host-contract-v1');assert.deepEqual(contract.library_inventory.installed_work_skill_ids,['S01']);assert.equal(contract.library_inventory.channel_catalog_installed,false);assert.equal(contract.worker_scope.allow_evolution,false);assert.equal(contract.worker_scope.allow_goal_continuity,false);assert.ok(discovered.result_bytes<=16000);const next=contract.next_actions.find(item=>item.tool==='cost_summary');assert.ok(next);const costs=mcp(next.tool,next.arguments);assert.equal(costs.data.full_cost_minor,null);assert.equal(inspect().source_gets,0);mark(stage,{official_client:true,contract_bytes:discovered.result_bytes,original_cap:16000,installed_skill_ids:['S01'],suggested_cost_read:true,full_cost:null,source_gets:0});
  stage='one_real_public_source';
  const read=mcp('campaign_research',{run_id:'pilot-product',request_id:'cloud-pilot-original-read',urls:[source]});
  const receipt=read.data.sources[0].receipt_id;assert.equal(read.data.reused_original_artifact,false);
