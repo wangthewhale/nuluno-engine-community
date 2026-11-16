@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Canonical Host test transport retains actual HTTP headers
+        run: node --test deploy/render-pilot/tests/canonical-http.test.mjs
       - name: Build pinned Engine and reviewed deployment adapter
         run: docker build --file deploy/render-pilot/Dockerfile --tag nuluno-engine-render-pilot:ci deploy/render-pilot
       - name: Real SQLite lifecycle and backup/recovery regressions in Linux image

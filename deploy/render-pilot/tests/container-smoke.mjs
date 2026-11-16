@@ -10,6 +10,7 @@ import {createServer} from 'node:net';
 import {mkdirSync,writeFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {join,dirname} from 'node:path';
+import {canonicalHttpFetch} from './canonical-http.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url)),evidence=join(root,'evidence','docker-smoke.json');
 const image=process.env.ENGINE_PILOT_SMOKE_IMAGE??'nuluno-engine-render-pilot:ci';
@@ -44,7 +45,7 @@ function start(restore={}){
 function remove(){if(started){docker(['rm','--force',container]);started=false;}}
 async function healthy(){
  for(let count=0;count<120;count++){
-  try{const response=await fetch(local+'/healthz',{headers:{Host:canonicalHost}});if(response.ok){const value=await response.json();assert.equal(value.version,'0.13.0a2');return value;}}catch{}
+  try{const response=await canonicalHttpFetch(local+'/healthz',{headers:{Host:canonicalHost}});report.lastHealthStatus=response.status;if(response.ok){const value=await response.json();assert.equal(value.version,'0.13.0a2');return value;}}catch(error){report.lastHealthFailureKind=error?.name??'Error';}
   await new Promise(done=>setTimeout(done,500));
  }
  throw Error('actual_container_health_not_ready');
@@ -61,9 +62,11 @@ function mcp(name,args,expectError=false){
  // Bare imports resolve from the fixed installed gateway package inside the
  // actual image. No unofficial RPC client, fixture server or fake readback.
  const program=`import {Client,StreamableHTTPClientTransport} from '@modelcontextprotocol/client';
+ import {request as httpRequest} from 'node:http';
+ ${canonicalHttpFetch.toString()}
  const client=new Client({name:'nuluno-render-pilot-linux-check',version:'1.0.0'});
  try{
- await client.connect(new StreamableHTTPClientTransport(new URL('http://127.0.0.1:10000/mcp'),{requestInit:{headers:{Host:'${canonicalHost}',Authorization:'Bearer '+process.env.ENGINE_PILOT_BEARER}}}));
+ await client.connect(new StreamableHTTPClientTransport(new URL('http://127.0.0.1:10000/mcp'),{fetch:canonicalHttpFetch,requestInit:{headers:{Host:'${canonicalHost}',Authorization:'Bearer '+process.env.ENGINE_PILOT_BEARER}}}));
  const tools=(await client.listTools()).tools;
  if(tools.some(t=>['run_create','tool_execute','economic_receipt_ingest'].includes(t.name)))throw Error('unscoped_tool_exposed');
  const result=await client.callTool({name:${JSON.stringify(name)},arguments:${JSON.stringify(args)}});
@@ -77,15 +80,15 @@ function mcp(name,args,expectError=false){
  return JSON.parse(runIn('node',['--input-type=module','-'],{stdin:program}));
 }
 async function denied(){
- const response=await fetch(local+'/mcp',{method:'POST',headers:{Host:canonicalHost,Authorization:'Bearer '+token,'content-type':'application/json','accept':'application/json, text/event-stream'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'original-denied-key',version:'1'}}})});
+ const response=await canonicalHttpFetch(local+'/mcp',{method:'POST',headers:{Host:canonicalHost,Authorization:'Bearer '+token,'content-type':'application/json','accept':'application/json, text/event-stream'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-11-25',capabilities:{},clientInfo:{name:'original-denied-key',version:'1'}}})});
  assert.equal(response.status,401);return response.status;
 }
 try{
  docker(['volume','create',volume]);stage='first_boot';start();await healthy();const first=inspect();
  assert.equal(first.pid1_uid,10001);assert.equal(first.config_uid,10001);assert.equal(first.config_mode,'0o600');assert.equal(first.mount_mode,'0o700');assert.equal(first.run_count,1);assert.equal(first.source_gets,0);
  assert.deepEqual(first.source_urls,[source]);assert.equal(first.original_token_env,'ENGINE_PILOT_BEARER');
- assert.equal((await fetch(local+'/healthz')).status,403,'CI must not weaken canonical Host policy');
- assert.equal((await fetch(local+'/healthz',{headers:{Host:canonicalHost,Origin:'https://outside.ci.invalid'}})).status,403);
+ assert.equal((await canonicalHttpFetch(local+'/healthz')).status,403,'CI must not weaken canonical Host policy');
+ assert.equal((await canonicalHttpFetch(local+'/healthz',{headers:{Host:canonicalHost,Origin:'https://outside.ci.invalid'}})).status,403);
  assert.equal(mcp('status',{run_id:'outside-authorized-run'},true).rejected,true);
  mark(stage,{actual_linux_image_boot:true,pid1_uid:10001,state_volume:true,strict_host_and_origin:true,outside_run_denied:true});
  stage='one_real_public_source';
