@@ -77,6 +77,9 @@ persistent work, MCP and bounded method checks. Bring your own model/host and
 actual platform authority for broader tasks. The separately licensed sales
 library is not required for this public trial.
 
+
+[Anonymous GitHub install + Codex-authored Notavue campaign](docs/evidence/campaign-notavue-anonymous-20261116.json): one original source read, two product-specific angle hypotheses, the same saved campaign after restart, and original-key denial after revocation. Maintainer-run technical evidence; no customer acquisition or sales lift is claimed.
+
 ## From a URL to something you can review
 
 | Deliverable | What the campaign workbench actually does |

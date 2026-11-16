@@ -1,0 +1,48 @@
+{
+  "schema": "nuluno-anonymous-published-campaign-acceptance-v1",
+  "observed_at": "2026-11-16T07:26:03.435320+00:00",
+  "source_commit": "c54f19d8fa833988e1fba3b5ae265fcc5acbcd16",
+  "repository": "https://github.com/wangthewhale/nuluno-engine-community",
+  "anonymous_git_clone": true,
+  "operator": "Codex maintainer acting as external MCP client; not external customer adoption",
+  "public_url": "https://notavue.com/",
+  "steps": [
+    "starter real source read",
+    "external AI authored two product-specific hypotheses from original fact IDs",
+    "new candidate built without new source read or key",
+    "fresh process same candidate and original artifact reused",
+    "same original key revoked",
+    "later fresh process native 401 exit 3"
+  ],
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    3
+  ],
+  "candidate_origin": "external Codex agent; no model call inside Engine",
+  "original_run_id": "campaign-beca3e1bc319bac7",
+  "source_receipt": "84317862d93e42b874b6f5b06168326cfe8c4357e87e536ae0eb3992e6d3516e",
+  "artifact_id": "campaign-42f6c5b6080d72f481da9b52",
+  "artifact_digest": "1e5c5084ced70b6ac5e7e38f2b1cfd400146d43ac457f04243e859d901920f1e",
+  "restarted_artifact_reused": true,
+  "provider_ledger_counts": {
+    "table": "public_read_requests",
+    "requests": 1,
+    "attempts": 1,
+    "definition": "persisted Engine source-read attempts only; dependency installation and operator discovery requests excluded"
+  },
+  "provider_read_quota": 1,
+  "native_revoked_denial": 401,
+  "replacement_key_created": false,
+  "external_platform_writes": 0,
+  "native_conversions": null,
+  "full_cost": null,
+  "sales_lift_verified": false,
+  "autonomous_learning_demonstrated": false,
+  "paid_packages_changed": false,
+  "immutable_alpha2_assets_changed": false,
+  "workflow": "https://github.com/wangthewhale/nuluno-engine-community/actions/runs/43822829139"
+}
+
