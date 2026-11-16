@@ -41,3 +41,7 @@ This new driver is an addon in current `main`; it is not present in the immutabl
 [Actual terminal lines](evidence/one-command-terminal-20261116.txt) · [Machine receipt](evidence/one-command-first-use-20261116.json) · [Existing helper and manual procedure](../examples/source-brief/README.md)
 
 This verifies public research, state reuse and revocation. Sales improvement, qualified leads, private social publishing and unattended self-evolution are not established by this trial.
+
+## Anonymous published-source check
+
+An anonymous clean checkout of `f5f950c669da887b181ca3ddee2184707b6f1aea` also ran the one command and its recorded replay successfully. [Exact commit-bound machine record](evidence/one-command-published-20261116.json). The expected helper exits were `[0, 0, 0, 3]`; the later driver replay performed zero new provider actions. This separately records the published-source check and does not replace the earlier operator trial. The existing alpha2 tag and assets remain unchanged.

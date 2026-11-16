@@ -1,0 +1,170 @@
+{
+  "schema": "nuluno-published-one-command-acceptance-v1",
+  "product": "engine",
+  "passed": true,
+  "observedAt": "2026-11-16T04:20:59.612264+00:00",
+  "repository": "https://github.com/wangthewhale/nuluno-engine-community",
+  "sourceCommit": "f5f950c669da887b181ca3ddee2184707b6f1aea",
+  "downloadMethod": "anonymous public git clone; empty global/system Git config and no credential helper",
+  "originalReleaseTagsOrAssetsChanged": false,
+  "cleanCheckoutBeforeAndAfter": true,
+  "trial": {
+    "schema": "nuluno-one-command-public-trial-v1",
+    "product": "engine",
+    "passed": true,
+    "observedAt": "2026-11-16T04:20:59.394Z",
+    "packageVersion": "0.13.0a2",
+    "sourceSnapshotSha256": "9b258726ef4d71509363308bb9d1fd14a48b5e510f64d55b2cfa52ca1fe8afec",
+    "sourceFiles": 205,
+    "baseCheckoutCommit": "f5f950c669da887b181ca3ddee2184707b6f1aea",
+    "checkoutClean": true,
+    "bootstrapSha256": "4c49a9cbf6ab10575f03400a6f4f605b6a6aec1d5765045cfc3081519d235f33",
+    "helperSha256": "757a3cbdf7f50ce9108b7dc99d62c7e553f3c81158f4c093c86929a94cebfc50",
+    "steps": [
+      {
+        "stage": "read",
+        "expectedExit": 0,
+        "result": {
+          "schema": "nuluno-source-brief-v1",
+          "passed": true,
+          "observedAt": "2026-11-16T04:20:57.458Z",
+          "engineVersion": "0.13.0a2",
+          "node": "v24.22.1",
+          "sourceUrl": "https://www.python.org/",
+          "sourceBodySha256": "87f1976023f96ece9bc1c4ca961fac4e663d0dc9254de6d1dad60b8b18561038",
+          "originalRunId": "source-brief-3a612d3b0026605c",
+          "originalRequestId": "original-source-3a612d3b0026605c",
+          "receiptId": "4f3ea109a4c78f7e051dc1d7791829c69b8e84a3a50ddbbe97ae0cbc64b86b40",
+          "reusedOriginalReceipt": false,
+          "providerRequestsReserved": 1,
+          "originalReceiptReuses": 0,
+          "excerptBytes": 1941,
+          "modelCalls": 0,
+          "externalWrites": 0,
+          "fullCostMinor": null,
+          "independentEfficacyVerified": false
+        }
+      },
+      {
+        "stage": "resume",
+        "expectedExit": 0,
+        "result": {
+          "schema": "nuluno-source-brief-v1",
+          "passed": true,
+          "observedAt": "2026-11-16T04:20:58.559Z",
+          "engineVersion": "0.13.0a2",
+          "node": "v24.22.1",
+          "sourceUrl": "https://www.python.org/",
+          "sourceBodySha256": "87f1976023f96ece9bc1c4ca961fac4e663d0dc9254de6d1dad60b8b18561038",
+          "originalRunId": "source-brief-3a612d3b0026605c",
+          "originalRequestId": "original-source-3a612d3b0026605c",
+          "receiptId": "4f3ea109a4c78f7e051dc1d7791829c69b8e84a3a50ddbbe97ae0cbc64b86b40",
+          "reusedOriginalReceipt": true,
+          "providerRequestsReserved": 1,
+          "originalReceiptReuses": 1,
+          "excerptBytes": 1941,
+          "modelCalls": 0,
+          "externalWrites": 0,
+          "fullCostMinor": null,
+          "independentEfficacyVerified": false
+        }
+      },
+      {
+        "stage": "revoke",
+        "expectedExit": 0,
+        "result": {
+          "schema": "nuluno-source-brief-revocation-v1",
+          "passed": true,
+          "observedAt": "2026-11-16T04:20:58.961Z",
+          "sourceUrl": "https://www.python.org/",
+          "originalRunId": "source-brief-3a612d3b0026605c",
+          "originalKeyRevoked": true,
+          "httpStatus": 401,
+          "newKeyCreated": false,
+          "externalWrites": 0,
+          "completeCost": null,
+          "afterFreshServiceProcess": true,
+          "invocationRequestedRevocation": true,
+          "readSucceeded": false
+        }
+      },
+      {
+        "stage": "denial",
+        "expectedExit": 3,
+        "result": {
+          "schema": "nuluno-source-brief-revocation-v1",
+          "passed": true,
+          "observedAt": "2026-11-16T04:20:59.372Z",
+          "sourceUrl": "https://www.python.org/",
+          "originalRunId": "source-brief-3a612d3b0026605c",
+          "originalKeyRevoked": true,
+          "httpStatus": 401,
+          "newKeyCreated": false,
+          "externalWrites": 0,
+          "completeCost": null,
+          "afterFreshServiceProcess": true,
+          "invocationRequestedRevocation": false,
+          "readSucceeded": false
+        }
+      }
+    ],
+    "modelCalls": 0,
+    "externalProviderWrites": 0,
+    "dependencySetupNetworkCalls": null,
+    "completeCost": null,
+    "privateAccountUsed": false,
+    "existingInstallOrStateReplaced": false,
+    "temporaryPrivateConsumerRemovedAfterSuccess": true
+  },
+  "replay": {
+    "schema": "nuluno-recorded-trial-replay-v1",
+    "product": "engine",
+    "state": "replayed_recorded_trial",
+    "historicalPassed": true,
+    "executedCurrentTrial": false,
+    "newProviderActions": 0
+  },
+  "steps": [
+    {
+      "step": "anonymous-clone",
+      "exitCode": 0
+    },
+    {
+      "step": "exact-checkout",
+      "exitCode": 0
+    },
+    {
+      "step": "head",
+      "exitCode": 0
+    },
+    {
+      "step": "clean-before",
+      "exitCode": 0
+    },
+    {
+      "step": "one-command-actual",
+      "exitCode": 0
+    },
+    {
+      "step": "historical-replay",
+      "exitCode": 0
+    },
+    {
+      "step": "clean-after",
+      "exitCode": 0
+    }
+  ],
+  "completeCost": null,
+  "modelCalls": 0,
+  "externalProviderWrites": 0,
+  "sourceRelationship": "This evidence-only follow-up records the preceding exact source commit. It does not assert that later documentation commits were independently rerun.",
+  "linuxCi": {
+    "runId": 43803466768,
+    "jobId": 133088777510,
+    "conclusion": "success",
+    "actualContainerBoot": true,
+    "stateAndRevocationPersisted": true,
+    "url": "https://github.com/wangthewhale/nuluno-engine-community/actions/runs/43803466768"
+  },
+  "immutableReleaseRelationship": "Current-source addon; not included in the existing alpha2 tag or its four immutable release assets."
+}
