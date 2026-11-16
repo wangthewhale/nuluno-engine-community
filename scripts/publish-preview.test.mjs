@@ -99,3 +99,11 @@ test('existing assets reject duplicate/extra names and absent or mismatched dige
  assert.throws(()=>validateExistingState({...base,assets:[{...good[0],name:'unexpected.bin'}]},f.config),/existing_asset_inventory_mismatch/);
  for(const patch of [{id:0},{id:'1'},{size:good[0].size+1},{digest:'sha256:'+'0'.repeat(64)},{digest:undefined},{digest:null},{digest:good[0].digest.replace('sha256:','SHA256:')}])assert.throws(()=>validateExistingState({...base,assets:[{...good[0],...patch}]},f.config),/existing_asset_digest_mismatch/);
 }));
+
+test('GitHub form CRLF normalization preserves exact text and every newline',()=>withFixture(f=>{
+ const good=release(f.config),base={tagCommit:f.config.sourceCommit,assets:[]};
+ const crlf=good.body.replace(/\n/g,'\r\n');
+ assert.equal(validateExistingState({...base,release:{...good,body:crlf}},f.config).createRelease,false);
+ const changed=[crlf.replace('Apache','apache'),crlf+'\r\n',' '+crlf,crlf+' ',crlf.replace(/\r\n/,'\r'),crlf.replace('Apache','Ａpache')];
+ for(const body of changed)assert.throws(()=>validateExistingState({...base,release:{...good,body}},f.config),/existing_release_mismatch/);
+}));

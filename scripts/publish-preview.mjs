@@ -40,7 +40,7 @@ export function validateExistingState({tagCommit,release,assets=[]},config=CONFI
  if(tagCommit!==null&&tagCommit!==config.sourceCommit)fail('existing_tag_source_mismatch');
  if(!release){if(assets.length)fail('assets_without_release');return {createRelease:true,missingAssets:Object.keys(config.files),skipAssets:[]};}
  if(tagCommit!==config.sourceCommit)fail('existing_release_tag_missing');
- if(!Number.isSafeInteger(release.id)||release.id<1||release.tag_name!==config.tag||release.target_commitish!==config.sourceCommit||release.draft!==false||release.prerelease!==true||release.name!==config.title||release.body!==config.notes)fail('existing_release_mismatch');
+ if(!Number.isSafeInteger(release.id)||release.id<1||release.tag_name!==config.tag||release.target_commitish!==config.sourceCommit||release.draft!==false||release.prerelease!==true||release.name!==config.title||typeof release.body!=='string'||release.body.replace(/\r\n/g,'\n')!==config.notes)fail('existing_release_mismatch');
  const seen=new Set();
  for(const asset of assets){
   if(!asset||typeof asset.name!=='string'||seen.has(asset.name)||!Object.hasOwn(config.files,asset.name))fail('existing_asset_inventory_mismatch');seen.add(asset.name);
