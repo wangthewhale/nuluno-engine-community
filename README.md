@@ -1,14 +1,37 @@
 # Nuluno Engine Community
 
-**Keep an agent's work, evidence and next steps when its process stops.**
+**Keep sales work moving across agent runs.**
 
-I built this because my agents could finish individual tool calls and still lose
-the larger job: repeat research, forget what was tried, or report a test as a
-business result. Engine keeps durable work, original source receipts and
-versioned method checks behind an MCP interface that you host.
+A self-hosted sales and growth engine for persistent goals, evidence-backed
+workflows and checked method updates, usable through MCP.
 
-The Apache-2.0 community core includes the complete S01 public-product-research
-starter. Bring your own model and platform permissions for broader work.
+**Free core:** S01 product research. **Separate paid library:** 99 goals ·
+134 graphs · 188 folders.
+
+Make a real public-source brief. Restart the process. Recover the original run
+and receipt. Revoke that worker and confirm that the same key stays denied.
+
+[Try the real task](#first-run-make-something-you-can-use) ·
+[Let your agent set it up](SETUP.md) ·
+[Inspect the actual proof](docs/evidence/first-use-anonymous-alpha2-20261115.json)
+
+![Recorded Engine read, restart, original-receipt reuse and revoked-key denial](docs/images/first-use-proof.svg)
+
+*Recorded 2026-11-15 · macOS/arm64 · operator run.*
+
+## Tell your agent
+
+```text
+Use Nuluno Engine. Read https://raw.githubusercontent.com/wangthewhale/nuluno-engine-community/main/SETUP.md
+and run its real
+public first-use task. Show the source brief, original receipt and native
+revocation proof. Preserve the original task/state; keep credentials private.
+```
+
+The free Apache-2.0 core includes the S01 public-product-research starter,
+persistent work, MCP and bounded method checks. Bring your own model/host and
+actual platform authority for broader tasks. The separately licensed sales
+library is not required for this public trial.
 
 ## First run: make something you can use
 

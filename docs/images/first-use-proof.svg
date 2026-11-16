@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1270" height="760" viewBox="0 0 1270 760"><rect width="1270" height="760" fill="white"/>
+<text x="58" y="72" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="45" font-weight="700">Nuluno Engine</text>
+<text x="58" y="118" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="400">Read once. Resume the original work. Revoke the same key.</text>
+<text x="58" y="164" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400">Recorded operator run · 0.13.0a2 · 2026-11-15 · macOS/arm64</text>
+<rect x="58" y="218" width="278" height="280" rx="10" fill="#f8f8f8" stroke="#111" stroke-width="2"/>
+<text x="78" y="259" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700">1  REAL SOURCE</text>
+<text x="78" y="316" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">Public source brief</text>
+<text x="78" y="361" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">1 reserved request</text>
+<text x="78" y="406" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">Receipt d4a1a6029a5bfb</text>
+<rect x="360" y="218" width="278" height="280" rx="10" fill="#f8f8f8" stroke="#111" stroke-width="2"/>
+<text x="380" y="259" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700">2  NEW PROCESS</text>
+<text x="380" y="316" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">Same run and receipt</text>
+<text x="380" y="361" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">Still 1 reserved request</text>
+<text x="380" y="406" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">No new source read</text>
+<rect x="662" y="218" width="278" height="280" rx="10" fill="#f8f8f8" stroke="#111" stroke-width="2"/>
+<text x="682" y="259" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700">3  REVOKE</text>
+<text x="682" y="316" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">Original worker key</text>
+<text x="682" y="361" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">HTTP 401</text>
+<text x="682" y="406" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">No replacement key</text>
+<rect x="964" y="218" width="278" height="280" rx="10" fill="#f8f8f8" stroke="#111" stroke-width="2"/>
+<text x="984" y="259" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700">4  NEW PROCESS</text>
+<text x="984" y="316" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">Native revoked denial</text>
+<text x="984" y="361" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">HTTP 401</text>
+<text x="984" y="406" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400">Dedicated exit 3</text>
+<text x="58" y="558" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700">Model calls: 0     External writes: 0     Complete cost: unknown</text>
+
+
+
+<text x="58" y="620" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="15">Exact tested source: 60dd4cbf521a43e54e7a4382945da58e872ac950</text>
+<text x="58" y="663" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="14">Proof SHA-256: 9ed71016400556ca1090e13309d74b53257f85eb95ed823d50101baaed9d4a39</text>
+<text x="58" y="706" fill="#111" font-family="Arial,Helvetica,sans-serif" font-size="17">Recorded operator run; data diagram of actual public-provider receipts.</text>
+</svg>

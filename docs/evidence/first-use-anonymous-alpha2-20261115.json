@@ -1,0 +1,124 @@
+{
+  "schema": "nuluno-anonymous-alpha2-first-use-v1",
+  "passed": true,
+  "product": "engine",
+  "observed_at": "2026-11-15T02:52:07.049594+00:00",
+  "source_commit": "60dd4cbf521a43e54e7a4382945da58e872ac950",
+  "source_repository": "https://github.com/wangthewhale/nuluno-engine-community",
+  "package_version": "0.13.0a2",
+  "helper_path": "examples/source-brief/brief.mjs",
+  "helper_sha256": "757a3cbdf7f50ce9108b7dc99d62c7e553f3c81158f4c093c86929a94cebfc50",
+  "sdk_files_sha256": {
+    "deploy/mcp-gateway/compatibility.mjs": "182b5a9be894c8ec90518760549a7cb72acf1ba6cc0a4648324469125cb0abfd",
+    "deploy/mcp-gateway/public-read-demo.mjs": "e9c4fcc68e51e5cbf41091e08d9c98400b06d560ca56895b858b693dc501388f",
+    "deploy/mcp-gateway/server.mjs": "51dfa41b6548517cb117a16a8e834fbab7fb995d0cb4a52196b97346919cdf78"
+  },
+  "host": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v24.22.1",
+    "python": "Python 3.9.6"
+  },
+  "anonymous_exact_commit_install": true,
+  "resumed_after_harness_config_error_before_provider_task": true,
+  "earlier_setup_only_source_commit": "60dd4cbf521a43e54e7a4382945da58e872ac950",
+  "personal_git_pip_npm_config_used": false,
+  "nuluno_website_session_used": false,
+  "original_runtime_or_private_extension_used": false,
+  "steps": [
+    {
+      "stage": "first_public_task",
+      "exit_code": 0,
+      "result": {
+        "schema": "nuluno-source-brief-v1",
+        "passed": true,
+        "observedAt": "2026-11-15T02:52:05.077Z",
+        "engineVersion": "0.13.0a2",
+        "node": "v24.22.1",
+        "sourceUrl": "https://www.python.org/",
+        "sourceBodySha256": "2f95975790945c9cff9b8b09dbbd1ee42e69eb2665017c973cae94004ac5914d",
+        "originalRunId": "source-brief-3a612d3b0026605c",
+        "originalRequestId": "original-source-3a612d3b0026605c",
+        "receiptId": "d4a1a6029a5bfb8576a8c0cbc8a4c164b524a190afb18efd4d6317d0fd0e9819",
+        "reusedOriginalReceipt": false,
+        "providerRequestsReserved": 1,
+        "originalReceiptReuses": 0,
+        "excerptBytes": 1940,
+        "modelCalls": 0,
+        "externalWrites": 0,
+        "fullCostMinor": null,
+        "independentEfficacyVerified": false
+      }
+    },
+    {
+      "stage": "new_process_original_task",
+      "exit_code": 0,
+      "result": {
+        "schema": "nuluno-source-brief-v1",
+        "passed": true,
+        "observedAt": "2026-11-15T02:52:06.203Z",
+        "engineVersion": "0.13.0a2",
+        "node": "v24.22.1",
+        "sourceUrl": "https://www.python.org/",
+        "sourceBodySha256": "2f95975790945c9cff9b8b09dbbd1ee42e69eb2665017c973cae94004ac5914d",
+        "originalRunId": "source-brief-3a612d3b0026605c",
+        "originalRequestId": "original-source-3a612d3b0026605c",
+        "receiptId": "d4a1a6029a5bfb8576a8c0cbc8a4c164b524a190afb18efd4d6317d0fd0e9819",
+        "reusedOriginalReceipt": true,
+        "providerRequestsReserved": 1,
+        "originalReceiptReuses": 1,
+        "excerptBytes": 1940,
+        "modelCalls": 0,
+        "externalWrites": 0,
+        "fullCostMinor": null,
+        "independentEfficacyVerified": false
+      }
+    },
+    {
+      "stage": "revoke_original_key",
+      "exit_code": 0,
+      "result": {
+        "schema": "nuluno-source-brief-revocation-v1",
+        "passed": true,
+        "observedAt": "2026-11-15T02:52:06.603Z",
+        "sourceUrl": "https://www.python.org/",
+        "originalRunId": "source-brief-3a612d3b0026605c",
+        "originalKeyRevoked": true,
+        "httpStatus": 401,
+        "newKeyCreated": false,
+        "externalWrites": 0,
+        "completeCost": null,
+        "afterFreshServiceProcess": true,
+        "invocationRequestedRevocation": true,
+        "readSucceeded": false
+      }
+    },
+    {
+      "stage": "new_process_native_denial",
+      "exit_code": 3,
+      "result": {
+        "schema": "nuluno-source-brief-revocation-v1",
+        "passed": true,
+        "observedAt": "2026-11-15T02:52:07.023Z",
+        "sourceUrl": "https://www.python.org/",
+        "originalRunId": "source-brief-3a612d3b0026605c",
+        "originalKeyRevoked": true,
+        "httpStatus": 401,
+        "newKeyCreated": false,
+        "externalWrites": 0,
+        "completeCost": null,
+        "afterFreshServiceProcess": true,
+        "invocationRequestedRevocation": false,
+        "readSucceeded": false
+      }
+    }
+  ],
+  "model_calls": 0,
+  "external_provider_writes": 0,
+  "complete_cost": null,
+  "outside_human_trial": false,
+  "private_inbox_signup_publication_proven": false,
+  "linux_claimed": false,
+  "sales_lift_proven": false,
+  "private_state_or_credentials_included": false
+}
